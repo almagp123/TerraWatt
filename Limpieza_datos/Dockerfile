@@ -11,6 +11,5 @@ CMD ["sh", "-c", "\
                     python Extraccion_precios_energia.py && \
                     python Datos_limpieza_meteorologicos.py && \
                     python Generacion_csv_modelos.py && \
-                    python Elastic_creacion.py &&\
                     tail -f /dev/null"]
 
