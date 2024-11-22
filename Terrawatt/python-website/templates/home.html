@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron text-center custom-background">
+    <h1 class="display-4">Bienvenido a TERRAWAT</h1>
+    <p class="lead">Calcula y predice tu factura de luz de manera ecofriendly y personalizada.</p>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" href="{{ url_for('calculate_bill') }}" role="button">Calcular mi factura</a>
+</div>
+
+<!-- Contenido adicional debajo del jumbotron -->
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='images/placas.png') }}" class="img-fluid rounded" alt="Paneles solares">
+        </div>
+        <div class="col-md-6">
+            <h2>¿Por qué elegir TERRAWAT?</h2>
+            <ul>
+                <li><strong>Cálculo Personalizado:</strong> Adaptamos el cálculo según tu ubicación, tipo de vivienda y número de habitantes.</li>
+                <li><strong>Eco-Friendly:</strong> Promovemos el uso responsable de energía para cuidar el medio ambiente.</li>
+                <li><strong>Fácil de Usar:</strong> Herramientas simples y rápidas para obtener tus resultados en minutos.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
