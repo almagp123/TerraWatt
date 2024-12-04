@@ -1,6 +1,0 @@
-Hola Alvaro, soy Alma, te quería comentar que como puedes observar en la hora de subida de los documentos decidí trasnochas para ver si podía 
-solucionar el error del elasticsearch y poder descubrir porque no se me conectaba a la network. Te he subido lo que llevaba hasta las 11:59 en la carpeta del GitHub y he añadido otra carpeta que se llama TerraWatt en la cual encontraras todo el trabajo de nuevo pero esta vez si ejecutará y se conectará a elasticsearch. También te he actualizado las instrucciones, estarán dentro de la carpeta que te comente. 
-Entenderé (pero me pondré muy triste :( )si no lo quieres tener en cuenta porque me he pasado de la hora fijada, pido benevolencia :) y que tengas en cuenta los nuevos archivos con los nuevos procedimientos porfa. 
-Gracias de antemano 
-Espero que lo tengas en cuenta, la verdad nada me había dado más dolor de cabeza que esto :( 
-Perdona las horas
