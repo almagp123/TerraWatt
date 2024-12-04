@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Cabecera */
+
+.cabecera {
+    background-color: #fff;
+    position: fixed;
+    display: flex; 
+    justify-content: space-between;
+    z-index: 1000;
+    top: 0;
+    width: 100%;
+    padding: 0% 5%;    
+    align-items: center;
+} 
+
+
+.cabecera .barra-navegacion ul {
+    display: flex; 
+    margin-right: 10%;
+}
+
+.cabecera .barra-navegacion ul li a {
+    font-size: 18px;
+    padding: 20px;
+    color: rgb(16, 88, 152);
+    display: block;
+    font-weight: 600;
+    white-space: nowrap;
+    padding-right: 0 20%;
+
+}
+
+.cabecera .barra-navegacion ul li a:hover {
+    color: rgb(0, 0, 0);
+}
+
+.barra-navegacion span {
+    margin-right: 23vw;
+    color: rgb(11, 72, 126);
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.boton-llamar-barra-navegacion {
+    margin-left: 15px; 
+    align-items: center;
+    margin-right: 10vw;
+    margin-top: 1vw;
+}
+
+.boton-llamar {
+    background-color: #00bfff; 
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    min-width: 10vw;
+    position: fixed;
+    font-size: 17px;
+}
+
+.boton-llamar i {
+    margin-right: 10px; 
+    font-size: 20px;
+}
+
+.boton-llamar:hover {
+    background-color: #008fcc;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
+}
+
+
+/* Pie de página */
+
+.pie-de-pagina {
+    background-color: #001f29;
+    color: #ffffff;
+    padding: 40px 20px;
+    margin-top: 40px;
+    font-family: Arial, sans-serif;
+}
+
+.contenido-pie-de-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+.logo-pie-de-pagina img {
+    width: 150px;
+    
+}
+
+.rating-pie-de-pagina .estrellas {
+    color: #ffd700;
+    font-size: 20px;
+}
+
+.apps-pie-de-pagina {
+    display: flex;
+}
+
+.apps-pie-de-pagina .boton-descarga {
+    width: 120px;
+    margin-right: 10px;
+}
+
+.links-pie-de-pagina h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.links-pie-de-pagina a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.links-pie-de-pagina a:hover {
+    color: #00bfff;
+}
+
+.legal-pie-de-pagina {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #bbbbbb;
+}
