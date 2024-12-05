@@ -18,7 +18,7 @@ body {
 .encabezado {
     background-color: rgb(53, 192, 231);
     min-height: 50vh;
-    background-image: url('images/Vector_pag_principal.svg');
+    background-image: url('../images/Vector_pag_principal.svg');
     background-repeat: no-repeat;
     background-position: right 10% bottom 70%;
     background-size: 40%;
