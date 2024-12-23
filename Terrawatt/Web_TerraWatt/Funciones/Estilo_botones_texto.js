@@ -23,7 +23,7 @@ document.querySelectorAll('.factura-section').forEach((section) => {
                         if (isBold) {
                             const [boldText, normalText] = paragraph.split(':');
                             const b = document.createElement('b');
-                            b.textContent = boldText + ':';
+                            b.textContent = boldText + ':' ;
                             p.appendChild(b);
                             p.append(' ' + normalText.trim());
                         } else {
