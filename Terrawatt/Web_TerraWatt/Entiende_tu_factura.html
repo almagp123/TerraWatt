@@ -37,5 +37,76 @@
 
         </header>
     </section>
+    <section>
+        
+        <section>
+            <div class="seccion-facturas">
+                <!-- Página 1 -->
+                <div class="factura-pagina-1">
+                    <div class="factura">
+                        <div class="factura-section datos_personales" 
+                            data-title="Datos de la factura" 
+                            data-info="En este apartado podremos visualizar nuestros datos personales así como cuál es el periodo de nuestra factura de la luz, en este caso como podemos ver es de 36 días." 
+                            data-subinfo="Periodo: 36 días, Fecha de emisión: 09/12/2024">
+                        </div>
+
+                        <div class="factura-section resumen" 
+                        data-title="Resumen de la factura"
+                        data-info="El resumen de la factura de electricidad detalla cómo se compone el costo total de tu consumo energético. En esta sección puedes encontrar
+                        Potencia Contratada: El coste fijo asociado a la potencia que tienes contratada, expresado en euros.
+                        Consumo de Energía: El coste variable basado en la cantidad de energía consumida durante el período de facturación.
+                        Descuentos: Si aplican descuentos específicos por promociones o planes, estos se detallan aquí.
+                        Impuestos: Los impuestos aplicables, como el IVA o cualquier impuesto específico a la electricidad.
+                        Otros Cargos: Otros conceptos adicionales que puedan aplicarse, como servicios extra contratados.
+                        Forma de Pago: Información sobre el método de pago, como domiciliación bancaria, IBAN y datos relacionados.">
+                    </div>
+                    <div class="factura-section consumo_total" 
+                    data-title="Consumo Total" 
+                    data-info="En este caso podemos ver el conusmo en kWh total en en nuestro periodo, así como el precio medio del kWh que hemos pagado." 
+                    data-subinfo="Periodo: 36 días, Precio medio del kWh: 0.089272€">
+                </div>                   
+                    </div>
+                </div>
+
+                <!-- Página 2 -->
+                <div class="factura-pagina-2">
+                    <div class="factura">
+                        <div class="factura-section datos" 
+                            data-info="Datos de la factura: Información específica de la página 2.">
+                        </div>
+                        <div class="factura-section consumo" 
+                            data-info="Consumo eléctrico: Detalles adicionales sobre la página 2.">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+               
+    
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modal-title"></h2>
+                <p id="modal-info"></p>
+                <ul id="modal-subinfo"></ul> 
+            </div>
+        </div>
+        
+        </div>
+            <script src="Funciones/Modal_cerrar.js"></script>
+        </div>
+        <div>
+            <script src="Funciones/Estilo_botones_texto.js"></script>
+        </div>
+
+
+
+        
+    </section>
+    <section>
+        <div id="footer-placeholder"></div>
+    <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+</section>
+    
 <body>
     
