@@ -44,9 +44,7 @@ body {
     margin-bottom: 0.5vw;
 }
 
-
-
-/* Contenedor principal de la sección */
+/* Contenedor principal de la secciones de ambas facturas ya que tienen el estilo común para las 4 páginas de esta */
 
 .seccion-facturas {
     width: 100%;
@@ -77,18 +75,23 @@ body {
     background-size: calc(100% - 40px) calc(100% - 40px);
 }
 
-/* Página 1 específica */
+/* Página 1  */
 .factura-pagina-1 .factura {
     background-image: url('../images/factura_alba-1_tachado-1.svg'); 
 }
 
-/* Página 2 específica */
+/* Página 2  */
 .factura-pagina-2 .factura {
     background-image: url('../images/factura_alba-2-1.svg'); 
 }
+
+/* Página 3  */
 .factura-pagina-3 .factura {
     background-image: url('../images/factura_alba-3-1.svg'); 
 }
+
+/* Página 4  */
+
 .factura-pagina-4 .factura {
     background-image: url('../images/factura_alba-5-1.svg'); 
 }
@@ -108,6 +111,8 @@ body {
     cursor: pointer; 
     animation: parpadeo 1s infinite; 
 }
+
+/* Ahora vamos a definir para clase (o ventana emergente que queramos tener en cada una de nuetsras páginas su posición para poder ajustarla a nuestras necesidades */
 .factura-section.datos_personales {
     position: absolute; 
     top: 4%; 
@@ -116,6 +121,7 @@ body {
     height: 10%; 
     box-sizing: border-box;
 }
+
 .factura-section.resumen {
     position: absolute; 
     top: 23.5%; 
@@ -124,6 +130,7 @@ body {
     height: 13%; 
     box-sizing: border-box;
 }
+
 .factura-section.consumo_total {
     position: absolute; 
     top: 40%; 
@@ -132,6 +139,7 @@ body {
     height: 20%; 
     box-sizing: border-box;
 }
+
 .factura-section.evolucion_consumo {
     position: absolute; 
     top: 40%; 
@@ -140,6 +148,7 @@ body {
     height: 23%; 
     box-sizing: border-box;
 }
+
 .factura-section.datos {
     position: absolute;
     top: 4%;
@@ -155,6 +164,7 @@ body {
     width: 43%;
     height: 20%; 
 }
+
 .factura-section.informacion_consumo {
     position: absolute;
     top: 29.5%;
@@ -163,6 +173,31 @@ body {
     height: 10%; 
 }
 
+.factura-section.detalles_de_la_factura {
+    position: absolute;
+    top: 6%;
+    left: 9%;
+    width: 85%;
+    height: 16%; 
+}
+
+.factura-section.resumen_total {
+    position: absolute;
+    top: 24%;
+    left: 9%;
+    width: 85%;
+    height: 10%; 
+}
+
+.factura-section.graficos {
+    position: absolute;
+    top: 6%;
+    left: 9%;
+    width: 85%;
+    height: 32%; 
+}
+
+/* Definimos los parpadeos de cada uno de estos recuadros  */
 @keyframes parpadeo {
     0% {
         background-color: rgba(76, 175, 80, 0.1); 
@@ -177,6 +212,7 @@ body {
         box-shadow: none; 
     }
 }
+
 /* Subapartados dentro del modal */
 .modal-content ul {
     list-style: none;
@@ -193,7 +229,7 @@ body {
 
 
 
-/* Modal */
+/* Ventanas emergentes y sus configuraciones de color, equis... */
 .modal {
     display: none;
     position: fixed;
