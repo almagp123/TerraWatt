@@ -12,8 +12,8 @@ document.querySelectorAll('.factura-section').forEach((section) => {
         const subinfoText = this.getAttribute('data-subinfo');
 
         // Actualiza el título y texto principal
-        title.textContent = titleText || "Sin título"; // Default si no hay título
-        text.textContent = mainText || "Sin contenido"; // Default si no hay texto principal
+        title.textContent = titleText || "Sin título"; 
+        text.textContent = mainText || "Sin contenido"; 
         const paragraphs = mainText.split('\n');
                 text.innerHTML = ''; 
                 paragraphs.forEach(paragraph => {
