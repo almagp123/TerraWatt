@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selección Interactiva</title>
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .contenedor {
+      width: 80%;
+      max-width: 600px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .opciones {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .boton {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #f4f4f4;
+      margin: 0 10px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .boton.activo {
+      background-color: #00bfff;
+      color: white;
+      border-color: #00bfff;
+    }
+
+    .boton:hover {
+      background-color: #008fcc;
+      color: white;
+      border-color: #008fcc;
+    }
+
+    .seccion-desplegable {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .seccion-desplegable.activo {
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .boton-enviar {
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .boton-enviar:hover {
+      background-color: #008fcc;
+    }
+  </style>
+</head>
+<body>
+
+<div class="contenedor">
+  <h2>Tu búsqueda</h2>
+  
+  <!-- Opciones principales -->
+  <div class="opciones">
+    <div id="opcion-electricidad" class="boton">Electricidad</div>
+    <div id="opcion-gas" class="boton">Gas Natural</div>
+  </div>
+
+  <!-- Subopción: Conozco mi consumo -->
+  <h3>Conozco mi consumo en kWh</h3>
+  <div class="opciones">
+    <div id="opcion-no" class="boton">No</div>
+    <div id="opcion-si" class="boton">Sí</div>
+  </div>
+
+  <!-- Sección desplegable para "Sí" -->
+  <div id="seccion-si" class="seccion-desplegable">
+    <h3>Datos de consumo de luz</h3>
+    <label for="tarifa">Tipo de tarifa:</label>
+    <select id="tarifa">
+      <option value="base">Base</option>
+      <option value="valle">Valle/Llano/Punta</option>
+    </select>
+    <label for="potencia">Potencia en kW:</label>
+    <input type="number" id="potencia" min="1" max="10" step="1" value="4">
+    <button class="boton-enviar">Calcular factura</button>
+  </div>
+
+  <!-- Sección desplegable para "No" -->
+  <div id="seccion-no" class="seccion-desplegable">
+    <h3>Información alternativa</h3>
+    <p>No conocemos tu consumo. Por favor, selecciona una estimación:</p>
+    <label for="estimacion">Consumo estimado:</label>
+    <select id="estimacion">
+      <option value="bajo">Bajo</option>
+      <option value="medio">Medio</option>
+      <option value="alto">Alto</option>
+    </select>
+    <button class="boton-enviar">Continuar</button>
+  </div>
+</div>
+
+<script>
+  // Selección de elementos
+  const opcionNo = document.getElementById("opcion-no");
+  const opcionSi = document.getElementById("opcion-si");
+  const seccionSi = document.getElementById("seccion-si");
+  const seccionNo = document.getElementById("seccion-no");
+
+  // Mostrar sección correspondiente para "Sí"
+  opcionSi.addEventListener("click", () => {
+    opcionSi.classList.add("activo");
+    opcionNo.classList.remove("activo");
+    seccionSi.classList.add("activo");
+    seccionNo.classList.remove("activo");
+  });
+
+  // Mostrar sección correspondiente para "No"
+  opcionNo.addEventListener("click", () => {
+    opcionNo.classList.add("activo");
+    opcionSi.classList.remove("activo");
+    seccionNo.classList.add("activo");
+    seccionSi.classList.remove("activo");
+  });
+</script>
+
+</body>
+</html>

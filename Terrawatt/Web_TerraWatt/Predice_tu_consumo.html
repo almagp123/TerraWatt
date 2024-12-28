@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="estilos/estilos_comunes.css">
+    <link rel="stylesheet" href="estilos/estilos_predice_tu_consumo.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <section>
+            <div id="header-placeholder"></div>
+        <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+    </section>
+
+    <section>
+        <header>
+          <div class="encabezado3">
+            <div class="encabezado-contenido3">
+              <h1>Predice tu consumo!</h1>
+            </div>
+                <div class="datos_consumo_luz">
+                    <h3>Datos de consumo de luz</h3>
+                    <div class="botones">
+                        <div id="opcion-base" class="boton">
+                            <img src="images/alarm-clock-check.svg" alt="Tarifa-base" class="icono">
+                            
+                            Base
+                        </div>
+
+                        <div id="opcion-valle" class="boton">
+                            <img src="images/sunset.svg" alt="Tarifa-variable" class="icono">
+                            
+                            Valle/Llano/Punta
+                        </div>
+                    </div>
+                    <div id="seccion-desplegable-base" class="seccion-desplegable oculto">
+                        <div class="row">
+                          <label for="potencia" class="label">Potencia en kW</label>
+                          <div class="input-container">
+                            <button id="decrement" class="input-btn">-</button>
+                            <input type="number" id="potencia" min="1" max="10" step="0.5" value="4">
+                            <button id="increment" class="input-btn">+</button>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                            <label for="provincia" class="label">Provincia</label>
+                            <select id="provincia" class="select-provincia">
+                              <option value="">Selecciona una provincia</option>
+                              <option value="madrid">Madrid</option>
+                              <option value="barcelona">Barcelona</option>
+                              <option value="valencia">Valencia</option>
+                              <option value="sevilla">Sevilla</option>
+                              <option value="malaga">Málaga</option>
+                              <option value="granada">Granada</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <label for="numero_residentes" class="label">Número de residentes en la vivienda</label>
+                            <div class="input-container">
+                              <button id="decrement-residentes" class="input-btn">-</button>
+                              <input type="number" id="numero_residentes" min="1" max="10" step="1" value="4">
+                              <button id="increment-residentes" class="input-btn">+</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label for="provincia" class="label">Provincia</label>
+                            <select id="provincia" class="select-provincia">
+                              <option value="">Selecciona un tipo de vivienda</option>
+                              <option value="piso">Piso</option>
+                              <option value="Casa-unifamiliar">Casa Unifamiliar</option>
+                              <option value="Duplex">Dúplex</option>
+                              <option value="Adosado">Adosado</option>
+                            </select>
+                        </div>
+                          
+  
+                    </div>
+                      
+                      
+                </div>
+            </div>
+          </div>
+        </header>
+      </section>
+      
+    <script src="Funciones/Botones_predice_tu_consumo.js"></script>
+<body>
+
+
+
+    <section>
+        <div id="footer-placeholder"></div>
+    <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+</section>
+    

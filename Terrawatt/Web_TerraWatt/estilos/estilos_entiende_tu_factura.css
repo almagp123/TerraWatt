@@ -107,9 +107,10 @@ body {
     font-size: 14px;
     color: #333;
     padding: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
     cursor: pointer; 
-    animation: parpadeo 1s infinite; 
+    animation: parpadeo 2s ease-in-out infinite;
+    will-change: background-color, box-shadow;
+    transform: translateZ(0);
 }
 
 /* Ahora vamos a definir para clase (o ventana emergente que queramos tener en cada una de nuetsras páginas su posición para poder ajustarla a nuestras necesidades */
@@ -199,17 +200,13 @@ body {
 
 /* Definimos los parpadeos de cada uno de estos recuadros  */
 @keyframes parpadeo {
-    0% {
-        background-color: rgba(76, 175, 80, 0.1); 
-        box-shadow: none; 
+    0%, 100% { 
+        background-color: rgba(76, 175, 80, 0.1);
+        box-shadow: none;
     }
-    50% {
-        background-color: rgba(76, 175, 80, 0.3); 
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-    }
-    100% {
-        background-color: rgba(76, 175, 80, 0.1); 
-        box-shadow: none; 
+    50% { 
+        background-color: rgba(76, 175, 80, 0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 }
 
