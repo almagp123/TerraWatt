@@ -13,16 +13,19 @@
 </head>
 
 <body>
-    <section>
-            <div id="header-placeholder"></div>
-        <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
-    </section>
 
     <section>
         <header>
+            <div id="header-placeholder"></div>
+        <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+        </header>
+    </section>
+
+    <section>
+        
           <div class="encabezado3">
             <div class="encabezado-contenido3">
-              <h1>Predice tu consumo!</h1>
+              <h1> <br>Predice tu consumo!</h1>
             </div>
                 <div class="datos_consumo_luz">
                     <h3>Datos de consumo de luz</h3>
@@ -39,27 +42,17 @@
                             Valle/Llano/Punta
                         </div>
                     </div>
+                    <div id="aviso-trabajando" class="aviso oculto">
+                        <p>Estamos trabajando en esta funcionalidad. ¡Gracias por tu paciencia!</p>
+                    </div>
                     <div id="seccion-desplegable-base" class="seccion-desplegable oculto">
                         <div class="row">
                           <label for="potencia" class="label">Potencia en kW</label>
                           <div class="input-container">
                             <button id="decrement" class="input-btn">-</button>
-                            <input type="number" id="potencia" min="1" max="10" step="0.5" value="4">
+                            <input type="number" id="potencia" min="1" max="10" step="0.5" value="2">
                             <button id="increment" class="input-btn">+</button>
                           </div>
-                        </div>
-
-                        <div class="row">
-                            <label for="provincia" class="label">Provincia</label>
-                            <select id="provincia" class="select-provincia">
-                              <option value="">Selecciona una provincia</option>
-                              <option value="madrid">Madrid</option>
-                              <option value="barcelona">Barcelona</option>
-                              <option value="valencia">Valencia</option>
-                              <option value="sevilla">Sevilla</option>
-                              <option value="malaga">Málaga</option>
-                              <option value="granada">Granada</option>
-                            </select>
                         </div>
 
                         <div class="row">
@@ -72,8 +65,8 @@
                         </div>
 
                         <div class="row">
-                            <label for="provincia" class="label">Provincia</label>
-                            <select id="provincia" class="select-provincia">
+                            <label for="tipo_vivienda" class="label">Tipo de vivienda</label>
+                            <select id="tipo_vivienda" class="select-vivienda">
                               <option value="">Selecciona un tipo de vivienda</option>
                               <option value="piso">Piso</option>
                               <option value="Casa-unifamiliar">Casa Unifamiliar</option>
@@ -81,6 +74,23 @@
                               <option value="Adosado">Adosado</option>
                             </select>
                         </div>
+
+
+                        <div class="row">
+                            <label for="provincia" class="label">Provincia</label>
+                            <select id="provincia" class="select-provincia">
+                            </select>
+                          </div>
+
+                        <div class="row">
+                            <label for="consumo" class="label">Consumo última factura</label>
+                            <div class="input-container">
+                              <button id="decrement-consumo" class="input-btn">-</button>
+                              <input type="number" id="numero_consumo" min="1" max="400" step="0.5" value="100">
+                              <button id="increment-consumo" class="input-btn">+</button>
+                            </div>
+                        </div>
+                          
                           
   
                     </div>
@@ -89,7 +99,7 @@
                 </div>
             </div>
           </div>
-        </header>
+        
       </section>
       
     <script src="Funciones/Botones_predice_tu_consumo.js"></script>

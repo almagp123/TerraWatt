@@ -1,74 +1,85 @@
-document.querySelectorAll('.boton').forEach(boton => {
+// Función para manejar botones activos
+function activarBoton(botonSeleccionado, botones) {
+    botones.forEach(boton => boton.classList.remove("activo"));
+    botonSeleccionado.classList.add("activo");
+  }
+  
+  // Botones principales y su funcionalidad
+  const botonesOpciones = document.querySelectorAll('.boton');
+  const seccionDesplegableBase = document.getElementById("seccion-desplegable-base");
+  const avisoTrabajando = document.getElementById("aviso-trabajando");
+  
+  botonesOpciones.forEach(boton => {
     boton.addEventListener('click', () => {
-      document.querySelectorAll('.boton').forEach(btn => btn.classList.remove('activo'));
-      boton.classList.add('activo');
+      if (boton.id === "opcion-base") {
+        activarBoton(boton, botonesOpciones);
+        seccionDesplegableBase.classList.add("activo");
+        avisoTrabajando.classList.remove("activo");
+      } else if (boton.id === "opcion-valle") {
+        activarBoton(boton, botonesOpciones);
+        seccionDesplegableBase.classList.remove("activo");
+        avisoTrabajando.classList.add("activo");
+      }
     });
-});
-
-
-
-
-const botonBase = document.getElementById("opcion-base");
-const botonValle = document.getElementById("opcion-valle");
-const seccionDesplegableBase = document.getElementById("seccion-desplegable-base");
-
-botonBase.addEventListener("click", () => {
-  botonBase.classList.add("activo");
-  botonValle.classList.remove("activo");
-  seccionDesplegableBase.classList.add("activo");
-});
-
-botonValle.addEventListener("click", () => {
-  botonValle.classList.add("activo");
-  botonBase.classList.remove("activo");
-  seccionDesplegableBase.classList.remove("activo");
-});
-
-
-
-
-const decrementBtn = document.getElementById("decrement");
-const incrementBtn = document.getElementById("increment");
-const potenciaInput = document.getElementById("potencia");
-
-// Función para decrementar el valor en pasos de 0.5
-decrementBtn.addEventListener("click", () => {
-  const currentValue = parseFloat(potenciaInput.value); // Asegúrate de convertir a flotante
-  const minValue = parseFloat(potenciaInput.min);
-  if (currentValue > minValue) {
-    potenciaInput.value = (currentValue - 0.5).toFixed(1); // Resta 0.5 y mantiene un decimal
+  });
+  
+  // Función genérica para manejar incrementos y decrementos
+  function manejarIncrementoDecremento(decrementBtn, incrementBtn, input, step = 1) {
+    decrementBtn.addEventListener("click", () => {
+      const currentValue = parseFloat(input.value);
+      const minValue = parseFloat(input.min);
+      if (currentValue > minValue) {
+        input.value = (currentValue - step).toFixed(1);
+      }
+    });
+  
+    incrementBtn.addEventListener("click", () => {
+      const currentValue = parseFloat(input.value);
+      const maxValue = parseFloat(input.max);
+      if (currentValue < maxValue) {
+        input.value = (currentValue + step).toFixed(1);
+      }
+    });
   }
-});
-
-// Función para incrementar el valor en pasos de 0.5
-incrementBtn.addEventListener("click", () => {
-  const currentValue = parseFloat(potenciaInput.value); // Asegúrate de convertir a flotante
-  const maxValue = parseFloat(potenciaInput.max);
-  if (currentValue < maxValue) {
-    potenciaInput.value = (currentValue + 0.5).toFixed(1); // Suma 0.5 y mantiene un decimal
-  }
-});
-
-// Selección de elementos
-const decrementResidentesBtn = document.getElementById("decrement-residentes");
-const incrementResidentesBtn = document.getElementById("increment-residentes");
-const numeroResidentesInput = document.getElementById("numero_residentes");
-
-// Función para decrementar el valor en pasos de 0.5
-decrementResidentesBtn.addEventListener("click", () => {
-  const currentValue = parseFloat(numeroResidentesInput.value); // Convertimos el valor actual a flotante
-  const minValue = parseFloat(numeroResidentesInput.min);
-  if (currentValue > minValue) {
-    numeroResidentesInput.value = currentValue - 1; // Resta 0.5 y mantiene un decimal
-  }
-});
-
-// Función para incrementar el valor en pasos de 0.5
-incrementResidentesBtn.addEventListener("click", () => {
-  const currentValue = parseFloat(numeroResidentesInput.value); // Convertimos el valor actual a flotante
-  const maxValue = parseFloat(numeroResidentesInput.max);
-  if (currentValue < maxValue) {
-    numeroResidentesInput.value = currentValue + 1; // Suma 0.5 y mantiene un decimal
-  }
-});
-
+  
+  // Manejo de los controles de incremento/decremento
+  manejarIncrementoDecremento(
+    document.getElementById("decrement"),
+    document.getElementById("increment"),
+    document.getElementById("potencia"),
+    0.5
+  );
+  
+  manejarIncrementoDecremento(
+    document.getElementById("decrement-residentes"),
+    document.getElementById("increment-residentes"),
+    document.getElementById("numero_residentes"),
+    1
+  );
+  
+  manejarIncrementoDecremento(
+    document.getElementById("decrement-consumo"),
+    document.getElementById("increment-consumo"),
+    document.getElementById("numero_consumo"),
+    1
+  );
+  
+  // Generar dinámicamente opciones del menú de provincias
+  const provincias = [
+    "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila", "Badajoz",
+    "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón",
+    "Ciudad Real", "Córdoba", "Cuenca", "Girona", "Granada", "Guadalajara",
+    "Guipúzcoa", "Huelva", "Huesca", "Illes Balears", "Jaén", "La Coruña",
+    "La Rioja", "Las Palmas", "León", "Lérida", "Lugo", "Madrid", "Málaga",
+    "Murcia", "Navarra", "Ourense", "Palencia", "Pontevedra", "Salamanca",
+    "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona",
+    "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza",
+    "Ceuta", "Melilla"
+  ];
+  
+  const selectProvincia = document.getElementById("provincia");
+  selectProvincia.innerHTML = `<option value="">Selecciona una provincia</option>`;
+  provincias.forEach(provincia => {
+    selectProvincia.innerHTML += `<option value="${provincia.toLowerCase()}">${provincia}</option>`;
+  });
+  

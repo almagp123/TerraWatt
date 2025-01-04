@@ -23,13 +23,14 @@ body {
 
 .encabezado-contenido3 {
     margin-left: 35%;
-    margin-top: 6%;
+    margin-top: 4%;
+    text-align: left;
 }
 .encabezado-contenido3 h1 {
     font-size: 40px;
     color: rgb(11, 72, 126);
     text-transform: uppercase;
-    margin-bottom: 0.5vw;
+
 }
 
 
@@ -215,5 +216,39 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: #f9f9f9;
     width: 100%; /* Asegura que ocupe todo el espacio disponible */
     box-sizing: border-box;
-  }
+}
+  
+.select-vivienda {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    width: 100%; /* Asegura que ocupe todo el espacio disponible */
+    box-sizing: border-box;
+}
+
+
+
+
+.aviso {
+    display: none; /* Oculto por defecto */
+    background-color: #ffdddd;
+    border: 1px solid #ff5c5c;
+    color: #b30000;
+    padding: 10px 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+  
+.aviso p {
+    margin: 0;
+    font-weight: bold;
+}
+  
+.aviso.activo {
+    display: block; /* Mostrar cuando sea necesario */
+}
   
