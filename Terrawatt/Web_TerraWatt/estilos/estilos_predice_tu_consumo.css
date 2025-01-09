@@ -16,15 +16,14 @@ body {
     min-height: 50vh;
     background-image: url('../images/estadisticas_encabezado.svg');
     background-repeat: no-repeat;
-    background-position: bottom 70%;
     background-size: 30%;
     padding-bottom: 9rem;
 }
 
 .encabezado-contenido3 {
-    margin-left: 35%;
     margin-top: 4%;
-    text-align: left;
+    margin-left: 400.5px;
+
 }
 .encabezado-contenido3 h1 {
     font-size: 40px;
@@ -41,7 +40,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-left: 30%;
+    margin-left: 331.5px;
     margin-top: 5%;  
 }
 
@@ -217,7 +216,16 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 100%; /* Asegura que ocupe todo el espacio disponible */
     box-sizing: border-box;
 }
-  
+.select-meses {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    width: 100%; /* Asegura que ocupe todo el espacio disponible */
+    box-sizing: border-box;
+}
 .select-vivienda {
     flex: 2;
     padding: 10px;
@@ -249,6 +257,29 @@ input[type="number"]::-webkit-outer-spin-button {
 }
   
 .aviso.activo {
-    display: block; /* Mostrar cuando sea necesario */
+    display: block; 
 }
+
+.boton-centro {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; 
+}
+
+.boton-calcular {
+    background-color: rgb(131, 15, 15);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    
+}
+
+.boton-calcular:hover {
+    background-color: darkred;
+}
+
   
