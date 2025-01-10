@@ -1,6 +1,12 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from pydantic import BaseModel
+import os
+import pandas as pd
+import joblib
+from sklearn.preprocessing import StandardScaler
+
+
 
 app = FastAPI()
 
@@ -15,109 +21,262 @@ app.add_middleware(
 
 from pydantic import BaseModel
 
-# # Modificar la clase Datos para reflejar los cambios
 # class Datos(BaseModel):
 #     potencia: float
-#     numero_residentes: int
+#     numero_residentes: float
 #     tipo_vivienda: str
 #     provincia: str
-#     mes: str  # Añadir el nuevo campo mes
+#     mes: int  # Añadir el nuevo campo mes
+
+
+# RUTA_METEOROLOGICA = "../Limpieza_datos/Datos_limpios_meteorologicos"
 
 # # Endpoint
 # @app.post("/transformar")
 # async def transformar_datos(datos: Datos):
+#     # Definir todas las posibles variables dummies para el tipo de vivienda
+#     tipos_vivienda = [
+#         'Tipo de vivienda_Adosado',
+#         'Tipo de vivienda_Casa Unifamiliar',
+#         'Tipo de vivienda_Duplex',
+#         'Tipo de vivienda_Piso'
+#     ]
+
+#     # Crear un diccionario con todas las variables inicialmente en 0
+#     variables_vivienda = {tipo: False for tipo in tipos_vivienda}
+
+#     # Asignar el valor 1 a la variable correspondiente según el tipo de vivienda
+#     if datos.tipo_vivienda == "Adosado":
+#         variables_vivienda['Tipo de vivienda_Adosado'] = True
+#     elif datos.tipo_vivienda == "Casa Unifamiliar":
+#         variables_vivienda['Tipo de vivienda_Casa Unifamiliar'] = True
+#     elif datos.tipo_vivienda == "Duplex":
+#         variables_vivienda['Tipo de vivienda_Duplex'] = True
+#     elif datos.tipo_vivienda == "Piso":
+#         variables_vivienda['Tipo de vivienda_Piso'] = True
+#     else:
+#         return {"error": "Tipo de vivienda no reconocido. Por favor, revisa tu entrada."}
+
+
+
+#     provincia = datos.provincia  # Nombre de la provincia
+#     archivo_provincia = os.path.join(RUTA_METEOROLOGICA, f"{provincia}.csv")
+#     df_meteorologico = pd.read_csv(archivo_provincia, delimiter=";")
+#     df_meteorologico["MES"] = pd.to_datetime(df_meteorologico["FECHA"]).dt.month
+#     mes_usuario = datos.mes
+#     df_filtrado = df_meteorologico[df_meteorologico["MES"] == mes_usuario]
+
+#     columnas_meteorologicas = ["TMEDIA", "TMIN", "TMAX", "VELMEDIA", "SOL", "PRESMAX", "PRESMIN"]
+
+#     medias_meteorologicas = df_filtrado[columnas_meteorologicas].mean()
+#     medias_dict = medias_meteorologicas.to_dict()
+
+
+#     # Convertir las medias a un diccionario
+#     medias_dict = medias_meteorologicas.to_dict()
+ 
+
+
+
+        
+#     if not os.path.exists(archivo_provincia):
+#         return {"error": f"No se encontró el archivo de la provincia: {provincia}"}
+#     # Construir los datos transformados
 #     datos_transformados = {
-#         "potencia": datos.potencia + 100,
-#         "numero_residentes": datos.numero_residentes + 100,
-#         "tipo_vivienda": f"hola {datos.tipo_vivienda}",
-#         "provincia": f"hola {datos.provincia}",
-#         "mes": f"Mes seleccionado: {datos.mes}",  # Modificar para reflejar el mes
+#         "potencia": datos.potencia,
+#         "numero_residentes": datos.numero_residentes ,
+#         "provincia": datos.provincia,
+#         "mes": datos.mes,  
 #     }
+
+#     datos_transformados = {**datos_transformados,  **medias_dict, **variables_vivienda}
+
+
+
+#     RUTA_MODELOS = "../modelos_guardados"
+#     modelo_path = os.path.join(RUTA_MODELOS, f"Modelo_{provincia}.pkl")
+
+    
+#     if not os.path.exists(modelo_path):
+#         print(f"El modelo para {provincia} no se encontró en la ruta: {modelo_path}")
+
+#         return {"error": f"No se encontró el modelo para la provincia: {provincia},,, El modelo para {provincia} no se encontró en la ruta: {modelo_path}"}
+    
+#     modelo = joblib.load(modelo_path)
+
+
+#     feature_names = [
+#         "TMEDIA", "TMIN", "TMAX", "VELMEDIA", "SOL", "PRESMAX", "PRESMIN",
+#         "Potencia contratada (kW)", "Mes", "Media de residentes",
+#         "Tipo de vivienda_Adosado", "Tipo de vivienda_Casa Unifamiliar", 
+#         "Tipo de vivienda_Duplex", "Tipo de vivienda_Piso"
+#     ]
+#     # Preparar los datos para la predicción (asegúrate de que estén en el formato adecuado)
+#     features = [
+#         datos_transformados["TMEDIA"],
+#         datos_transformados["TMIN"],
+#         datos_transformados["TMAX"],
+#         datos_transformados["VELMEDIA"],
+#         datos_transformados["SOL"],
+#         datos_transformados["PRESMAX"],
+#         datos_transformados["PRESMIN"],
+#         datos.potencia,  # Potencia contratada (kW)
+#         datos.mes,  # Mes
+#         datos.numero_residentes,  # Media de residentes
+#         datos_transformados["Tipo de vivienda_Adosado"],
+#         datos_transformados["Tipo de vivienda_Casa Unifamiliar"],
+#         datos_transformados["Tipo de vivienda_Duplex"],
+#         datos_transformados["Tipo de vivienda_Piso"]
+#     ]
+#     features_df = pd.DataFrame([features], columns=feature_names)
+
+#     # Normalizar solo las columnas numéricas necesarias
+#     scaler = StandardScaler()
+
+#     # Variables que necesitan ser normalizadas
+#     features_to_normalize = ["TMEDIA", "TMIN", "TMAX", "VELMEDIA", "SOL", "PRESMAX", "PRESMIN", "Potencia contratada (kW)"]
+
+#     # Normalizar las columnas seleccionadas
+#     features_df[features_to_normalize] = scaler.fit_transform(features_df[features_to_normalize])
+
+#     # Realizar la predicción
+#     prediccion = modelo.predict(features_df)
+
+#     # Ajustar la predicción si es negativa
+#     prediccion = max(0, prediccion[0])
+
+#     datos_transformados = {**datos_transformados, **medias_dict, **variables_vivienda, "prediccion": prediccion}
+
+
 #     return {"datos_transformados": datos_transformados}
 
 
-
+import pandas as pd
+import numpy as np
 import joblib
 import os
-import pandas as pd
+# from tensorflow.keras.models import load_model
+from sklearn.preprocessing import StandardScaler
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-# Definir el modelo de entrada
+# Función para la predicción LSTM
+def predecir_precio_medio_intervalo(provincia, fecha_inicio, fecha_fin, data):
+    # Generar rango de fechas
+    dias_intervalo = pd.date_range(start=fecha_inicio, end=fecha_fin, freq='D')
+
+    # Filtrar los datos para la provincia
+    data_provincia = data[data['Provincia'].str.upper() == provincia.upper()]
+
+    if data_provincia.empty:
+        raise ValueError(f"No se encontraron datos para la provincia {provincia}. Por favor, revisa el nombre.")
+
+    # Obtener el último valor disponible como punto de partida
+    ultimo_valor = data_provincia['Precio total con impuestos (€/MWh)'].values[-1]
+    valor_inicial = np.array([[ultimo_valor]]).reshape(1, 1, 1)
+
+    # Predicciones para cada día en el intervalo
+    predicciones = []
+    for _ in dias_intervalo:
+        prediccion = modelo_lstm.predict(valor_inicial).flatten()[0]
+        predicciones.append(max(prediccion, 0))  # Asegurarse de que no haya valores negativos
+        valor_inicial = np.array([[prediccion]]).reshape(1, 1, 1)
+
+    # Calcular el precio medio
+    precio_medio_intervalo = np.mean(predicciones)
+    return precio_medio_intervalo
+
+
+# Función para la predicción con scikit-learn
+def predecir_precio_scikit(datos_transformados, provincia):
+    # Cargar el modelo de la provincia
+    modelo_path = f"../modelos_guardados/Modelo_{provincia}.pkl"
+    
+    if not os.path.exists(modelo_path):
+        raise ValueError(f"No se encontró el modelo para la provincia {provincia}")
+
+    modelo = joblib.load(modelo_path)
+
+    # Crear el dataframe con las características para hacer la predicción
+    feature_names = [
+        "TMEDIA", "TMIN", "TMAX", "VELMEDIA", "SOL", "PRESMAX", "PRESMIN",
+        "Potencia contratada (kW)", "Mes", "Media de residentes",
+        "Tipo de vivienda_Adosado", "Tipo de vivienda_Casa Unifamiliar", 
+        "Tipo de vivienda_Duplex", "Tipo de vivienda_Piso"
+    ]
+
+    features = [
+        datos_transformados["TMEDIA"],
+        datos_transformados["TMIN"],
+        datos_transformados["TMAX"],
+        datos_transformados["VELMEDIA"],
+        datos_transformados["SOL"],
+        datos_transformados["PRESMAX"],
+        datos_transformados["PRESMIN"],
+        datos_transformados["potencia"],  # Potencia contratada (kW)
+        datos_transformados["mes"],  # Mes
+        datos_transformados["numero_residentes"],  # Media de residentes
+        datos_transformados["Tipo de vivienda_Adosado"],
+        datos_transformados["Tipo de vivienda_Casa Unifamiliar"],
+        datos_transformados["Tipo de vivienda_Duplex"],
+        datos_transformados["Tipo de vivienda_Piso"]
+    ]
+
+    features_df = pd.DataFrame([features], columns=feature_names)
+
+    # Normalizar solo las columnas numéricas necesarias
+    scaler = StandardScaler()
+    features_to_normalize = ["TMEDIA", "TMIN", "TMAX", "VELMEDIA", "SOL", "PRESMAX", "PRESMIN", "Potencia contratada (kW)"]
+
+    features_df[features_to_normalize] = scaler.fit_transform(features_df[features_to_normalize])
+
+    # Realizar la predicción
+    prediccion = modelo.predict(features_df)
+
+    # Ajustar la predicción si es negativa
+    prediccion = max(0, prediccion[0])
+    
+    return prediccion
+
+
+# FastAPI app
+app = FastAPI()
+
 class Datos(BaseModel):
     potencia: float
-    numero_residentes: int
+    numero_residentes: float
     tipo_vivienda: str
     provincia: str
-    mes: int  # Mes seleccionado por el usuario
+    mes: int
 
-# Ruta para los modelos guardados
-modelos_guardados_folder = "C:/Users/Alma/Desktop/TerraWatt/Terrawatt/modelos_guardados"
-# Ruta para los archivos meteorológicos
-datos_meteorologicos_folder = "C:/Users/Alma/Desktop/TerraWatt/Terrawatt/Limpieza_datos/Datos_limpios_meteorologicos"
+# Cargar los datos meteorológicos
+data = pd.read_csv("../Limpieza_datos/Modelo_Precios_Met_Fest.csv", delimiter=';')
+data['FECHA'] = pd.to_datetime(data['FECHA'])
 
-# Función para cargar el modelo correspondiente a la provincia
-def cargar_modelo(provincia):
-    modelo_filename = os.path.join(modelos_guardados_folder, f"Modelo_{provincia}.pkl")
-    if os.path.exists(modelo_filename):
-        return joblib.load(modelo_filename)
-    else:
-        raise FileNotFoundError(f"El modelo para la provincia {provincia} no se encuentra disponible.")
-
-# Función para cargar los datos meteorológicos correspondientes
-def cargar_datos_meteorologicos(provincia, mes):
-    archivo_datos = os.path.join(datos_meteorologicos_folder, f"Datos_Meteorologicos_{provincia}.csv")
-    if os.path.exists(archivo_datos):
-        # Cargar los datos
-        datos = pd.read_csv(archivo_datos)
-        
-        # Convertir la columna 'Fecha' a tipo datetime
-        datos['FECHA'] = pd.to_datetime(datos['FECHA'], errors='coerce')
-        
-        # Filtrar los datos para el mes seleccionado
-        datos_mes = datos[datos['FECHA'].dt.month == mes]
-        
-        # Calcular la media de las columnas numéricas meteorológicas para el mes seleccionado
-        datos_mes_media = datos_mes[['TMEDIA', 'TMIN', 'TMAX', 'VELMEDIA', 'SOL', 'PRESMAX', 'PRESMIN']].mean()
-        
-        return datos_mes_media
-    else:
-        raise FileNotFoundError(f"Los datos meteorológicos para la provincia {provincia} no se encuentran disponibles.")
-
-# Endpoint para hacer la predicción
 @app.post("/transformar")
 async def transformar_datos(datos: Datos):
-    # Obtener la provincia y el mes de los datos enviados
-    provincia = datos.provincia
+    # Determinar la fecha de inicio y fin según el mes
     mes = datos.mes
+    fecha_inicio = f"2025-{mes:02d}-01"
+    if mes == 2:
+        fecha_fin = "2025-02-28"
+    elif mes in [4, 6, 9, 11]:
+        fecha_fin = f"2025-{mes:02d}-30"
+    else:
+        fecha_fin = f"2025-{mes:02d}-31"
 
+    # Filtrar datos meteorológicos y calcular medias
+    provincia = datos.provincia
+    precio_medio = predecir_precio_medio_intervalo(provincia, fecha_inicio, fecha_fin, data)
+    
+    # Transformación de los datos y predicción con scikit-learn o LSTM
     try:
-        # Cargar el modelo correspondiente a la provincia
-        modelo = cargar_modelo(provincia)
-
-        # Cargar los datos meteorológicos correspondientes a la provincia y mes
-        datos_meteorologicos = cargar_datos_meteorologicos(provincia, mes)
-        
-        # Aquí puedes preparar los datos meteorológicos junto con los otros datos que recibes (como potencia, etc.)
-        # Asumiendo que tienes los datos meteorológicos calculados como media:
-        X_entrada = [
-            datos.potencia,
-            datos.numero_residentes,
-            datos.tipo_vivienda,
-            datos_meteorologicos['TMEDIA'],  # Media de TMEDIA
-            datos_meteorologicos['TMIN'],    # Media de TMIN
-            datos_meteorologicos['TMAX'],    # Media de TMAX
-            datos_meteorologicos['VELMEDIA'],# Media de VELMEDIA
-            datos_meteorologicos['SOL'],     # Media de SOL
-            datos_meteorologicos['PRESMAX'], # Media de PRESMAX
-            datos_meteorologicos['PRESMIN']  # Media de PRESMIN
-        ]
-        
-        # Realizar la predicción
-        prediccion = modelo.predict([X_entrada])
-
-        # Devolver la predicción
-        return {"prediccion": prediccion.tolist()}  # Devolver el resultado como una lista
-
-    except FileNotFoundError as e:
+        if provincia in ["ALAVA", "OTRAS PROVINCIAS"]:  # Define las provincias donde se usará scikit-learn
+            prediccion = predecir_precio_scikit(datos.dict(), provincia)
+        else:  # Para otras provincias, se usará el modelo LSTM
+            prediccion = precio_medio
+    except ValueError as e:
         return {"error": str(e)}
+
+    # Formato de salida
+    return {"prediccion": prediccion, "fecha_inicio": fecha_inicio, "fecha_fin": fecha_fin}
