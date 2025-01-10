@@ -150,18 +150,16 @@ from pydantic import BaseModel
 
 #     return {"datos_transformados": datos_transformados}
 
-
 import pandas as pd
 import numpy as np
 import joblib
 import os
-# from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-# Función para la predicción LSTM
-def predecir_precio_medio_intervalo(provincia, fecha_inicio, fecha_fin, data):
+# Función para la predicción LSTM (para ser usada si se necesita LSTM)
+def predecir_precio_lstm(provincia, fecha_inicio, fecha_fin, data, modelo_lstm):
     # Generar rango de fechas
     dias_intervalo = pd.date_range(start=fecha_inicio, end=fecha_fin, freq='D')
 
@@ -185,7 +183,6 @@ def predecir_precio_medio_intervalo(provincia, fecha_inicio, fecha_fin, data):
     # Calcular el precio medio
     precio_medio_intervalo = np.mean(predicciones)
     return precio_medio_intervalo
-
 
 # Función para la predicción con scikit-learn
 def predecir_precio_scikit(datos_transformados, provincia):
@@ -267,16 +264,11 @@ async def transformar_datos(datos: Datos):
 
     # Filtrar datos meteorológicos y calcular medias
     provincia = datos.provincia
-    precio_medio = predecir_precio_medio_intervalo(provincia, fecha_inicio, fecha_fin, data)
-    
-    # Transformación de los datos y predicción con scikit-learn o LSTM
     try:
-        if provincia in ["ALAVA", "OTRAS PROVINCIAS"]:  # Define las provincias donde se usará scikit-learn
-            prediccion = predecir_precio_scikit(datos.dict(), provincia)
-        else:  # Para otras provincias, se usará el modelo LSTM
-            prediccion = precio_medio
-    except ValueError as e:
-        return {"error": str(e)}
+        precio_medio = predecir_precio_lstm(provincia, fecha_inicio, fecha_fin, data, modelo_lstm)
+    except ValueError:
+        precio_medio = predecir_precio_scikit(datos.dict(), provincia)
 
-    # Formato de salida
-    return {"prediccion": prediccion, "fecha_inicio": fecha_inicio, "fecha_fin": fecha_fin}
+    # Transformación de los datos y predicción con scikit-learn o LSTM
+    return {"prediccion": precio_medio, "fecha_inicio": fecha_inicio, "fecha_fin": fecha_fin}
+
