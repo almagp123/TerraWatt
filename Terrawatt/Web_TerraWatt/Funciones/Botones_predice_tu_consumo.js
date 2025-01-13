@@ -57,13 +57,9 @@ manejarIncrementoDecremento(
   1
 );
 
-manejarIncrementoDecremento(
-  document.getElementById("decrement-consumo"),
-  document.getElementById("increment-consumo"),
-  document.getElementById("numero_consumo"),
-  1
-);
 
+//Función valida
+// ----------
 // function enviarDatos() {
 //   // Capturar el valor de potencia y convertirlo a número
 //   const potencia = parseFloat(document.getElementById("potencia").value);
@@ -142,11 +138,16 @@ manejarIncrementoDecremento(
 //       document.getElementById("resultado").innerHTML =
 //         "<p style='color: red;'>Hubo un error al procesar los datos.</p>";
 //     });
-// }
 
+
+//   }
+
+
+
+// -----------------
 
 function enviarDatos() {
-  // Capturar el valor de potencia y convertirlo a número
+  // Capturar los valores del formulario
   const potencia = parseFloat(document.getElementById("potencia").value);
   console.log("Potencia capturada como número:", potencia);
 
@@ -155,9 +156,9 @@ function enviarDatos() {
   const provincia = document.getElementById("provincia").value;
   const mes = parseInt(document.getElementById("mes").value);
 
-  // Construir el objeto para enviar
+  // Construir el objeto de datos a enviar
   const datos = {
-    potencia: potencia, // Ya es un número
+    potencia: potencia,
     numero_residentes: numero_residentes,
     tipo_vivienda: tipo_vivienda,
     provincia: provincia,
@@ -165,7 +166,7 @@ function enviarDatos() {
   };
   console.log("Datos enviados al backend:", datos);
 
-  // Realizar el fetch
+  // Realizar la petición fetch
   fetch("http://127.0.0.1:8000/transformar", {
     method: "POST",
     headers: {
@@ -182,40 +183,49 @@ function enviarDatos() {
 
       if (!transformados) {
         console.error("Error: No se encontraron datos transformados en la respuesta del backend.");
+        resultadoDiv.innerHTML = "<p style='color: red;'>Error al obtener datos transformados.</p>";
         return;
       }
       console.log("Datos transformados:", transformados);
 
-      // Formatear la predicción a 2 decimales y añadir la unidad "kWh"
-      const prediccionFormateada = transformados.prediccion.toFixed(2) + " kWh";
+      // Procesar la predicción de consumo
+      const consumo = transformados.prediccion_consumo;
+      const consumoFormateado = consumo.toFixed(2) + " kWh";
+      
+      // Procesar la predicción de precio (si existe)
+      let precioHTML = "";
+      if (transformados.precio && typeof transformados.precio === "object") {
+        const fechaInicio = transformados.precio.fecha_inicio;
+        const fechaFin = transformados.precio.fecha_fin;
+        const precioMedio = transformados.precio.precio_medio.toFixed(2) + " €/MWh";
+        precioHTML = `<p><strong>Precio medio (de ${fechaInicio} a ${fechaFin}):</strong> ${precioMedio}</p>`;
+      } else {
+        precioHTML = "<p style='color: red;'>No se encontró información de precio.</p>";
+      }
 
-      let resultadosHTML = `<p><strong>Predicción:</strong> ${prediccionFormateada}</p>`;
+      // Combinar resultados
+      let resultadosHTML = `<p><strong>Consumo predicho:</strong> ${consumoFormateado}</p>`;
+      resultadosHTML += precioHTML;
 
-      // Crear el CSV para descargar
+      // (Opcional) Si deseas seguir generando el CSV, podrías incluir también los datos relacionados.
       let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "Potencia, Número de Residentes, Provincia, Mes, Tipo de Vivienda, TMEDIA, TMIN, TMAX, VELMEDIA, SOL, PRESMAX, PRESMIN, Predicción\n";
-      csvContent += `${transformados.potencia}, ${transformados.numero_residentes}, ${transformados.provincia}, ${transformados.mes}, ${transformados.tipo_vivienda}, ${transformados.TMEDIA}, ${transformados.TMIN}, ${transformados.TMAX}, ${transformados.VELMEDIA}, ${transformados.SOL}, ${transformados.PRESMAX}, ${transformados.PRESMIN}, ${transformados.prediccion}\n`;
+      csvContent += "Potencia, Número de Residentes, Provincia, Mes, Tipo de Vivienda, TMEDIA, TMIN, TMAX, VELMEDIA, SOL, PRESMAX, PRESMIN, Predicción Consumo, Precio Medio\n";
+      csvContent += `${transformados.potencia}, ${transformados.numero_residentes}, ${transformados.provincia}, ${transformados.mes}, ${transformados.tipo_vivienda}, ${transformados.TMEDIA}, ${transformados.TMIN}, ${transformados.TMAX}, ${transformados.VELMEDIA}, ${transformados.SOL}, ${transformados.PRESMAX}, ${transformados.PRESMIN}, ${consumo}, ${transformados.precio ? transformados.precio.precio_medio : ""}\n`;
 
-      // Crear un enlace de descarga con imagen
+      // Crear el enlace de descarga con imagen
       const encodedUri = encodeURI(csvContent);
       const downloadLink = document.createElement("a");
       downloadLink.setAttribute("href", encodedUri);
       downloadLink.setAttribute("download", "prediccion_datos.csv");
 
-
-
-      // Crear la imagen para el enlace
       const imagen = document.createElement("img");
-      imagen.src = "../Web_TerraWatt/images/imagen_descarga.png"; // Asegúrate de reemplazar esta URL con la ruta de tu imagen
+      imagen.src = "../Web_TerraWatt/images/imagen_descarga.png";  // Ajusta la ruta si es necesario
       imagen.alt = "Descargar CSV";
-      imagen.style.width = "50px"; // Ajusta el tamaño de la imagen
+      imagen.style.width = "50px";
       imagen.style.cursor = "pointer";
       imagen.style.alignItems = "center";
 
-      // Cuando la imagen se haga clic, se activará la descarga
       downloadLink.appendChild(imagen);
-
-      // Mostrar el enlace con la imagen
       resultadoDiv.innerHTML = resultadosHTML + "<br>" + downloadLink.outerHTML;
     })
     .catch((error) => {

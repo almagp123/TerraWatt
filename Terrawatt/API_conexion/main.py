@@ -1,25 +1,13 @@
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI
-from pydantic import BaseModel
-import os
-import pandas as pd
-import joblib
-from sklearn.preprocessing import StandardScaler
+# from fastapi.middleware.cors import CORSMiddleware
+# from fastapi import FastAPI
+# from pydantic import BaseModel
+# import os
+# import pandas as pd
+# import joblib
+# from sklearn.preprocessing import StandardScaler
 
 
 
-app = FastAPI()
-
-# Configuración de CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Permitir todos los orígenes (ajusta esto en producción)
-    allow_credentials=True,
-    allow_methods=["*"],  # Permitir todos los métodos (GET, POST, OPTIONS, etc.)
-    allow_headers=["*"],  # Permitir todos los encabezados
-)
-
-from pydantic import BaseModel
 
 # class Datos(BaseModel):
 #     potencia: float
@@ -27,8 +15,15 @@ from pydantic import BaseModel
 #     tipo_vivienda: str
 #     provincia: str
 #     mes: int  # Añadir el nuevo campo mes
+# app = FastAPI()
 
-
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],  # En producción, restringe los orígenes permitidos
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 # RUTA_METEOROLOGICA = "../Limpieza_datos/Datos_limpios_meteorologicos"
 
 # # Endpoint
@@ -150,58 +145,104 @@ from pydantic import BaseModel
 
 #     return {"datos_transformados": datos_transformados}
 
-import pandas as pd
-import numpy as np
-import joblib
-import os
-from sklearn.preprocessing import StandardScaler
+
+
+# # Modelo bueno arriba
+
+# # ----------
+
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from pydantic import BaseModel
+import os
+import pandas as pd
+import joblib
+from sklearn.preprocessing import StandardScaler
+import calendar
+from datetime import datetime
+import numpy as np
 
-# Función para la predicción LSTM (para ser usada si se necesita LSTM)
-def predecir_precio_lstm(provincia, fecha_inicio, fecha_fin, data, modelo_lstm):
-    # Generar rango de fechas
-    dias_intervalo = pd.date_range(start=fecha_inicio, end=fecha_fin, freq='D')
+# Crear la instancia de la API y configurar CORS
+app = FastAPI()
 
-    # Filtrar los datos para la provincia
-    data_provincia = data[data['Provincia'].str.upper() == provincia.upper()]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Para producción: restringir orígenes
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-    if data_provincia.empty:
-        raise ValueError(f"No se encontraron datos para la provincia {provincia}. Por favor, revisa el nombre.")
+# Definir el modelo de entrada para el endpoint de transformación
+class Datos(BaseModel):
+    potencia: float
+    numero_residentes: float
+    tipo_vivienda: str
+    provincia: str
+    mes: int  # Mes (número 1-12)
 
-    # Obtener el último valor disponible como punto de partida
-    ultimo_valor = data_provincia['Precio total con impuestos (€/MWh)'].values[-1]
-    valor_inicial = np.array([[ultimo_valor]]).reshape(1, 1, 1)
+RUTA_METEOROLOGICA = "../Limpieza_datos/Datos_limpios_meteorologicos"
 
-    # Predicciones para cada día en el intervalo
-    predicciones = []
-    for _ in dias_intervalo:
-        prediccion = modelo_lstm.predict(valor_inicial).flatten()[0]
-        predicciones.append(max(prediccion, 0))  # Asegurarse de que no haya valores negativos
-        valor_inicial = np.array([[prediccion]]).reshape(1, 1, 1)
+@app.post("/transformar")
+async def transformar_datos(datos: Datos):
+    # ---------------------------
+    # Parte 1: Predicción de Consumo
+    # ---------------------------
+    # Variables dummies para el tipo de vivienda
+    tipos_vivienda = [
+        'Tipo de vivienda_Adosado',
+        'Tipo de vivienda_Casa Unifamiliar',
+        'Tipo de vivienda_Duplex',
+        'Tipo de vivienda_Piso'
+    ]
+    variables_vivienda = {tipo: False for tipo in tipos_vivienda}
+    if datos.tipo_vivienda == "Adosado":
+        variables_vivienda['Tipo de vivienda_Adosado'] = True
+    elif datos.tipo_vivienda == "Casa Unifamiliar":
+        variables_vivienda['Tipo de vivienda_Casa Unifamiliar'] = True
+    elif datos.tipo_vivienda == "Duplex":
+        variables_vivienda['Tipo de vivienda_Duplex'] = True
+    elif datos.tipo_vivienda == "Piso":
+        variables_vivienda['Tipo de vivienda_Piso'] = True
+    else:
+        return {"error": "Tipo de vivienda no reconocido. Por favor, revisa tu entrada."}
 
-    # Calcular el precio medio
-    precio_medio_intervalo = np.mean(predicciones)
-    return precio_medio_intervalo
+    # Cargar y filtrar datos meteorológicos
+    provincia = datos.provincia
+    archivo_provincia = os.path.join(RUTA_METEOROLOGICA, f"{provincia}.csv")
+    if not os.path.exists(archivo_provincia):
+        return {"error": f"No se encontró el archivo de la provincia: {provincia}"}
 
-# Función para la predicción con scikit-learn
-def predecir_precio_scikit(datos_transformados, provincia):
-    # Cargar el modelo de la provincia
-    modelo_path = f"../modelos_guardados/Modelo_{provincia}.pkl"
-    
+    df_meteorologico = pd.read_csv(archivo_provincia, delimiter=";")
+    df_meteorologico["MES"] = pd.to_datetime(df_meteorologico["FECHA"]).dt.month
+    df_filtrado = df_meteorologico[df_meteorologico["MES"] == datos.mes]
+    columnas_meteorologicas = ["TMEDIA", "TMIN", "TMAX", "VELMEDIA", "SOL", "PRESMAX", "PRESMIN"]
+    medias_meteorologicas = df_filtrado[columnas_meteorologicas].mean()
+    medias_dict = medias_meteorologicas.to_dict()
+
+    # Construir datos transformados (para el modelo de consumo)
+    datos_transformados = {
+        "potencia": datos.potencia,
+        "numero_residentes": datos.numero_residentes,
+        "provincia": datos.provincia,
+        "mes": datos.mes,
+    }
+    datos_transformados = {**datos_transformados, **medias_dict, **variables_vivienda}
+
+    # Cargar el modelo de consumo (formato .pkl)
+    RUTA_MODELOS = "../modelos_guardados"
+    modelo_path = os.path.join(RUTA_MODELOS, f"Modelo_{provincia}.pkl")
     if not os.path.exists(modelo_path):
-        raise ValueError(f"No se encontró el modelo para la provincia {provincia}")
+        print(f"El modelo para {provincia} no se encontró en la ruta: {modelo_path}")
+        return {"error": f"No se encontró el modelo para la provincia: {provincia}"}
+    modelo_consumo = joblib.load(modelo_path)
 
-    modelo = joblib.load(modelo_path)
-
-    # Crear el dataframe con las características para hacer la predicción
     feature_names = [
         "TMEDIA", "TMIN", "TMAX", "VELMEDIA", "SOL", "PRESMAX", "PRESMIN",
         "Potencia contratada (kW)", "Mes", "Media de residentes",
         "Tipo de vivienda_Adosado", "Tipo de vivienda_Casa Unifamiliar", 
         "Tipo de vivienda_Duplex", "Tipo de vivienda_Piso"
     ]
-
     features = [
         datos_transformados["TMEDIA"],
         datos_transformados["TMIN"],
@@ -210,65 +251,81 @@ def predecir_precio_scikit(datos_transformados, provincia):
         datos_transformados["SOL"],
         datos_transformados["PRESMAX"],
         datos_transformados["PRESMIN"],
-        datos_transformados["potencia"],  # Potencia contratada (kW)
-        datos_transformados["mes"],  # Mes
-        datos_transformados["numero_residentes"],  # Media de residentes
+        datos.potencia,
+        datos.mes,
+        datos.numero_residentes,
         datos_transformados["Tipo de vivienda_Adosado"],
         datos_transformados["Tipo de vivienda_Casa Unifamiliar"],
         datos_transformados["Tipo de vivienda_Duplex"],
         datos_transformados["Tipo de vivienda_Piso"]
     ]
-
     features_df = pd.DataFrame([features], columns=feature_names)
-
-    # Normalizar solo las columnas numéricas necesarias
     scaler = StandardScaler()
     features_to_normalize = ["TMEDIA", "TMIN", "TMAX", "VELMEDIA", "SOL", "PRESMAX", "PRESMIN", "Potencia contratada (kW)"]
-
     features_df[features_to_normalize] = scaler.fit_transform(features_df[features_to_normalize])
 
-    # Realizar la predicción
-    prediccion = modelo.predict(features_df)
+    # Depuración: Imprimir los datos enviados al modelo de consumo
+    print("=== Datos enviados al modelo de consumo ===")
+    print(features_df.to_string())
 
-    # Ajustar la predicción si es negativa
-    prediccion = max(0, prediccion[0])
-    
-    return prediccion
+    # Realizar la predicción de consumo
+    prediccion_consumo = modelo_consumo.predict(features_df)
+    prediccion_consumo = max(0, prediccion_consumo[0])
+    datos_transformados["prediccion_consumo"] = prediccion_consumo
 
+    # ---------------------------
+    # Parte 2: Predicción de Precio (por intervalo de fechas)
+    # ---------------------------
+    # Suponemos que se dispone de un modelo de precios entrenado y guardado en formato .pkl
+    # (por ejemplo, un MLPRegressor) en la ruta "../modelos_guardados/AModelo_precios_mlp.pkl"
+    modelo_precios_path = os.path.join(RUTA_MODELOS, "AModelo_precios_mlp.pkl")
+    if os.path.exists(modelo_precios_path):
+        modelo_precios = joblib.load(modelo_precios_path)
+        
+        # Para determinar el intervalo: usaremos como año 2025 (por ejemplo)
+        # Usamos el mes (datos.mes) para definir el primer y último día
+        año = 2025
+        fecha_inicio = datetime(año, datos.mes, 1)
+        ultimo_dia = calendar.monthrange(año, datos.mes)[1]
+        fecha_fin = datetime(año, datos.mes, ultimo_dia)
+        
+        # Generar rango de fechas diario
+        rango_fechas = pd.date_range(start=fecha_inicio, end=fecha_fin, freq='D')
+        n_dias = len(rango_fechas)
+        print(f"Prediciendo precio para {n_dias} días, de {fecha_inicio.strftime('%Y-%m-%d')} a {fecha_fin.strftime('%Y-%m-%d')}.")
 
-# FastAPI app
-app = FastAPI()
+        # Cargar el dataset de precios para obtener el último precio histórico para la provincia
+        # (Se asume que el archivo es el mismo que usaste para entrenar el modelo de precios)
+        file_path_precios = "../Limpieza_datos/Modelo_Precios_Met_Fest.csv"
+        data_precios = pd.read_csv(file_path_precios, delimiter=';')
+        data_precios['FECHA'] = pd.to_datetime(data_precios['FECHA'])
+        data_precios = data_precios.sort_values(by='FECHA')
+        data_provincia_precios = data_precios[data_precios['Provincia'].str.upper() == provincia.upper()]
+        if data_provincia_precios.empty:
+            return {"error": f"No se encontraron datos de precios para la provincia: {provincia}"}
+        ultimo_precio = data_provincia_precios['Precio total con impuestos (€/MWh)'].values[-1]
+        print("Último precio histórico para predicción de precios:", ultimo_precio)
 
-class Datos(BaseModel):
-    potencia: float
-    numero_residentes: float
-    tipo_vivienda: str
-    provincia: str
-    mes: int
+        # Predicción recursiva: se usa el último precio conocido para predecir cada día
+        predicciones_precio = []
+        precio_actual = ultimo_precio
+        for dia in rango_fechas:
+            # El modelo de precios espera una entrada de forma (n_samples, 1)
+            entrada_precio = np.array([[precio_actual]])
+            precio_siguiente = modelo_precios.predict(entrada_precio)[0]
+            predicciones_precio.append(precio_siguiente)
+            precio_actual = precio_siguiente  # actualizar para la siguiente iteración
 
-# Cargar los datos meteorológicos
-data = pd.read_csv("../Limpieza_datos/Modelo_Precios_Met_Fest.csv", delimiter=';')
-data['FECHA'] = pd.to_datetime(data['FECHA'])
-
-@app.post("/transformar")
-async def transformar_datos(datos: Datos):
-    # Determinar la fecha de inicio y fin según el mes
-    mes = datos.mes
-    fecha_inicio = f"2025-{mes:02d}-01"
-    if mes == 2:
-        fecha_fin = "2025-02-28"
-    elif mes in [4, 6, 9, 11]:
-        fecha_fin = f"2025-{mes:02d}-30"
+        precio_medio = np.mean(predicciones_precio)
+        # Agregar a los datos transformados la información de la predicción del precio
+        datos_transformados["precio"] = {
+            "fecha_inicio": fecha_inicio.strftime("%Y-%m-%d"),
+            "fecha_fin": fecha_fin.strftime("%Y-%m-%d"),
+            "precio_medio": precio_medio,
+            "predicciones_diarias": predicciones_precio  # opcional
+        }
     else:
-        fecha_fin = f"2025-{mes:02d}-31"
+        datos_transformados["precio"] = "Modelo de precios no disponible"
 
-    # Filtrar datos meteorológicos y calcular medias
-    provincia = datos.provincia
-    try:
-        precio_medio = predecir_precio_lstm(provincia, fecha_inicio, fecha_fin, data, modelo_lstm)
-    except ValueError:
-        precio_medio = predecir_precio_scikit(datos.dict(), provincia)
-
-    # Transformación de los datos y predicción con scikit-learn o LSTM
-    return {"prediccion": precio_medio, "fecha_inicio": fecha_inicio, "fecha_fin": fecha_fin}
-
+    # Retornar los resultados de consumo y precio
+    return {"datos_transformados": datos_transformados}
