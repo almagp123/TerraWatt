@@ -8,7 +8,9 @@ from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 import xgboost as xgb
 import os
 from sklearn.preprocessing import StandardScaler
-import joblib  # Usaremos joblib para guardar el modelo
+import joblib  
+import matplotlib.pyplot as plt
+
 
 # Carpeta base donde se encuentran los datos y donde se guardarán los modelos
 base_folder = os.path.dirname(__file__)  # Obtiene la carpeta donde está el script
@@ -106,4 +108,15 @@ for province in provinces:
     joblib.dump(best_model, model_filename)
     print(f"El mejor modelo para {province} ha sido guardado como {model_filename}")
 
+    y_pred = best_model.predict(X_test)
 
+    # Crear la gráfica
+    plt.figure(figsize=(12, 6))
+    plt.plot(range(len(y_test)), y_test, label='Consumo Real', color='blue', marker='o')
+    plt.plot(range(len(y_pred)), y_pred, label='Predicción del Mejor Modelo', color='red', linestyle='--')
+    plt.legend()
+    plt.title(f'Predicción de Consumo Energético para {province}')
+    plt.xlabel('Índice de Datos de Prueba')
+    plt.ylabel('Consumo Energético (kWh/m²)')
+    plt.grid()
+    plt.show()
