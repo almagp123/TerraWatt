@@ -23,8 +23,8 @@ import pandas as pd
 
 # %%
 # Definimos de donde vamos a obtener los datos y donde vamos a guardar los datos limpios 
-input_folder = "Datos_brutos_meteorologicos"  
-output_folder = "Datos_limpios_meteorologicos"  
+input_folder = "../TerraWatt/Terrawatt/Limpieza_datos/Datos_brutos_meteorologicos"  
+output_folder = "../TerraWatt/Terrawatt/Limpieza_datos/Datos_limpios_meteorologicos"  
 
 # Crear la carpeta de salida si no existe
 if not os.path.exists(output_folder):
@@ -81,8 +81,8 @@ print("Procesamiento completado.")
 
 # %%
 # Definimos las carpetas
-input_folder = "Datos_brutos_meteorologicos"  
-output_folder = "Datos_limpios_meteorologicos" 
+input_folder = "../TerraWatt/Terrawatt/Limpieza_datos/Datos_brutos_meteorologicos"  
+output_folder = "../TerraWatt/Terrawatt/Limpieza_datos/Datos_limpios_meteorologicos" 
 
 # Obtener listas de archivos en ambas carpetas
 input_files = set(os.listdir(input_folder))
@@ -112,7 +112,7 @@ else:
 
 # %%
 # Definir la carpeta de entrada
-input_folder = "Datos_limpios_meteorologicos"
+input_folder = "../TerraWatt/Terrawatt/Limpieza_datos/Datos_limpios_meteorologicos"
 
 provincias_unicas = set()
 
@@ -150,7 +150,7 @@ import os
 import pandas as pd
 
 # Definir las carpetas de entrada y salida
-folder = "Datos_limpios_meteorologicos"
+folder = "../TerraWatt/Terrawatt/Limpieza_datos/Datos_limpios_meteorologicos"
 # Crear la carpeta de salida si no existe
 if not os.path.exists(folder):
     os.makedirs(folder)
@@ -195,7 +195,7 @@ print("Procesamiento completado.")
 # Además sustituimos todos estos datasets y los sustituimos por uno independiente por cada provincia, el nombre de cada archivo será el correspondiente a cada provincia.
 
 # %%
-folder = "Datos_limpios_meteorologicos"
+folder = "../TerraWatt/Terrawatt/Limpieza_datos/Datos_limpios_meteorologicos"
 
 if not os.path.exists(folder):
     os.makedirs(folder)
@@ -264,7 +264,7 @@ print("Consolidación y limpieza completadas.")
 # Por otro lado, nos vemos obligados a eliminar las ciudades de Ceuta y Melilla, ya que los datos que nos han proporcionado sobre el consumo no cuentan con datos de estas cuidades autónomas.
 
 # %%
-folder_path = "Datos_limpios_meteorologicos"
+folder_path = "../TerraWatt/Terrawatt/Limpieza_datos/Datos_limpios_meteorologicos"
 
 # Archivos a eliminar
 archivos_a_eliminar = ["CEUTA.csv", "MELILLA.csv"]

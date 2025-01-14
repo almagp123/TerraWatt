@@ -84,7 +84,7 @@ df_resultados
 import os
 
 # Definir la ruta de la carpeta y el archivo
-folder_path = 'Datos_brutos_generales'
+folder_path = '../TerraWatt/Terrawatt/Limpieza_datos/Datos_brutos_generales'
 file_path = os.path.join(folder_path, 'precios_energia.csv')
 
 # Crear la carpeta si no existe

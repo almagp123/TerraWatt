@@ -64,24 +64,8 @@ def test_index_data(client, index_name):
     except Exception as e:
         print(f"Error al consultar el índice '{index_name}': {e}")
 
-# Crear índices
-create_index_if_not_exists(client, "modelo_consumo_met_fest")
+# Crear índice para precios
 create_index_if_not_exists(client, "modelo_precios_met_fest")
-
-# Subir datos del archivo Modelo_Consumo_Met_fest.csv
-consumo_mapping = [
-    "Fecha", "Provincia", "Consumo energético (kWh/m²)", "Media de residentes",
-    "Potencia contratada (kW)", "Tipo de vivienda", "ALTITUD", "TMEDIA",
-    "TMIN", "TMAX", "DIR", "VELMEDIA", "RACHA", "SOL", "PRESMAX",
-    "PRESMIN", "Festivo", "Entre semana"
-]
-upload_csv_to_elasticsearch(
-    client,
-    "./Modelo_Consumo_Met_fest.csv",
-    "modelo_consumo_met_fest",
-    "consumo",
-    consumo_mapping
-)
 
 # Subir datos del archivo Modelo_Precios_Met_Fest.csv
 precios_mapping = [
@@ -97,6 +81,5 @@ upload_csv_to_elasticsearch(
     precios_mapping
 )
 
-# Comprobar los datos cargados en los índices
-test_index_data(client, "modelo_consumo_met_fest")
+# Comprobar los datos cargados en el índice de precios
 test_index_data(client, "modelo_precios_met_fest")

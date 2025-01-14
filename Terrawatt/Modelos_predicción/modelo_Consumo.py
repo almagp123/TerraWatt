@@ -76,8 +76,7 @@ for province in provinces:
     print(X.columns)
     print(X.head())
     print(X.dtypes)
-    X.to_csv("X_data.csv", index=False)  # Cambia "X_data.csv" por la ruta deseada
-    print("El archivo 'X_data.csv' ha sido guardado correctamente.")
+
     # Dividir en conjuntos de entrenamiento y prueba
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     
