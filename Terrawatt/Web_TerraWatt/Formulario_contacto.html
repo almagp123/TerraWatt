@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="estilos/estilos_comunes.css">
+    <link rel="stylesheet" href="estilos/estilos_inicio.css">
+    <link rel="stylesheet" href="estilos/estilos_formulario.css">
+
+</head>
+
+<body>
+    <section>
+        <div id="header-placeholder"></div>
+        <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+    </section>
+
+    <section>
+        <header class="encabezado">
+            <div class="encabezado-contenido">
+
+                <h1>
+                    <br>
+                    <br>
+                    ¡Contáctanos!
+                    <br>
+                    Estamos aquí para ayudarte
+                    <br>
+                    
+                </h1>
+
+            </div>
+            <div class="ola-diseno-vector" style="height: 150px; overflow: hidden;">
+                <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+                    <path d="M-0.37,100.07 C150.00,150.33 125.47,25.39 504.13,114.00 L500.00,-0.00 L0.00,-0.00 Z"
+                        style="stroke: none; fill: rgb(53, 192, 231);"></path>
+                </svg>
+            </div>
+        </header>
+    </section>
+
+    <section class="formulario-contacto">
+        <h2>Envíanos un mensaje</h2>
+        <form action="enviar_formulario.php" method="post" class="formulario">
+            <div class="campo-formulario">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" required>
+            </div>
+            <div class="campo-formulario">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" placeholder="Escribe tu correo" required>
+            </div>
+            <div class="campo-formulario">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Escribe tu teléfono">
+            </div>
+            <div class="campo-formulario">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí" required></textarea>
+            </div>
+            <div class="campo-formulario">
+                <button type="submit" class="btn-enviar">Enviar</button>
+            </div>
+        </form>
+    </section>
+
+    <section>
+        <div id="footer-placeholder"></div>
+        <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+    </section>
+
+</body>
+
+</html>

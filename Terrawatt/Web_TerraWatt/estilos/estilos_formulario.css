@@ -1,0 +1,91 @@
+
+.encabezado {
+    background-color: rgb(53, 192, 231);
+    min-height: 50vh;
+    background-image: url('../images/contacto.svg');
+    background-repeat: no-repeat;
+    background-position: right 10% bottom 70%;
+    background-size: 25%;
+    padding-bottom: 9rem;
+}
+
+h1, h2 {
+    text-align: left;
+    color: #03588C;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.formulario-contacto {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.campo-formulario {
+    margin-bottom: 15px;
+}
+
+.campo-formulario label {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.campo-formulario input[type="text"],
+.campo-formulario input[type="email"],
+.campo-formulario input[type="tel"],
+.campo-formulario textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.campo-formulario textarea {
+    resize: vertical;
+}
+
+.btn-enviar {
+    display: inline-block;
+    background: #03588C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-enviar:hover {
+    background: #0290C1;
+}
+
+@media (max-width: 768px) {
+    .formulario-contacto {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+}
