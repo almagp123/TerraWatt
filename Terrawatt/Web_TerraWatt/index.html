@@ -4,26 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio - TerraWatt</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="estilos/estilos_comunes.css">
     <link rel="stylesheet" href="estilos/estilos_inicio.css">
 </head>
 
 <body>
+    <!-- Boton de accesibilidad  -->
+    <button id="toggleAccesible" aria-label="Activar modo accesible">🦻 Modo Accesible</button>
+
+    <!-- LLamamos el script que activa la funcion de acceibilidad que nospermite leer el texto que seleccionamos -->
+    <script src="Funciones/accesibilidad.js"></script>
+
+    
+    <!-- Llamamos a la funcion que nos permite obtener tanto la barra de navegacion como el pie de pagina, dependiendo del ID la función determina si debe de introducir o la barra de navegacion o el pie de página, en este caso como el id es "header-pleaceholder", introducir la barra de navegacion -->
     <section>
-            <div id="header-placeholder"></div>
+        <div id="header-placeholder"></div>
         <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
     </section>
+
     <section>
+        <!-- En la clase dle encabezamos vamosa definir laprimera seccion de nuestra página web, esta tiene incluida los parametros necesarios para la accesibilidad -->
         <header class="encabezado">
             <div class="encabezado-contenido">
-                <h1><br>
+                <h1 id="texto-titulo">
+                    <br>
                     Conoce tu consumo! 
-                    <br>
-                    Compara tus facturas 
-                    <br>
-                     y entiendelas 
+                    <br> Compara tus facturas 
+                    <br> y entiendelas 
+                    
+                    <!-- Todos los textos "importantes" que queramos que sean acceisbles de manera que que todo texto que queramos que sea acceisble por voz y se lea el texto debemosde incluir nuestro boton de accesibilidad.  -->
+                    <button class="btn-voz accesible" onclick="leerTexto('texto-titulo')" aria-label="Leer título en voz alta">🔊</button>
                 </h1>
                 <ul class="Ticks">
                     <li><span class="tick">✔</span> Servicio personalizado y gratuito</li>
@@ -35,142 +47,331 @@
             <div class="rating-encabezado">
                 <div class="estrellas">
                     <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>                        <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>                        
+                    <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
                 <span>4,8 | 956 opiniones Google</span>
             </div>
            
-            <div class="ola-diseno-vector" style="height: 150px; overflow: hidden;"><svg viewBox="0 0 500 150"
-                    preserveAspectRatio="none" style="height: 100%; width: 100%;">
-                    <path d="M-0.37,100.07 C150.00,150.33 125.47,25.39 504.13,114.00 L500.00,-0.00 L0.00,-0.00 Z"
-                        style="stroke: none; fill: rgb(53, 192, 231);"></path>
-                </svg></div>
+            <!-- Vector de ola de decoracion -->
+            <div class="ola-diseno-vector">
+                <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+                    <path d="M-0.37,100.07 C150.00,150.33 125.47,25.39 504.13,114.00 L500.00,-0.00 L0.00,-0.00 Z" style="stroke: none; fill: #105F75;"></path>
+                </svg>
+            </div>
         </header>
     </section>
+
+
+    <!-- Ahora definismos la siguiente  seccion en la cual vamos a explicar cual es el proporsito de la pagina web y como vamos a realizar la predicciones para poder tener contexto de esta -->
     <section class="introduccion">
-        <h2>Déjate guiar para controlar a la perfección tu consumo energético</h2>
+        <h2 id="texto-intro">
+            <br>
+            Déjate guiar para controlar a la perfección tu consumo energético
+            <button class="btn-voz accesible" onclick="leerTexto('texto-intro')" aria-label="Leer título en voz alta">🔊</button>
+        </h2>
+
         <div class="explicacion">
             <img src="images/Equipo.svg" alt="Análisis de Consumo Personalizado" class="ajuste-vector">
-            <div class="texto-explicacion">
-                <h3>Análisis de Consumo Personalizado</h3>
-                <p>Nuestra herramienta calcula el consumo de electricidad esperado basándose en el consumo medio de tu provincia y las condiciones climáticas locales. Cada dato climático, desde la temperatura hasta la humedad, se toma en cuenta para asegurar una previsión precisa.</p>
+            <div class="texto-explicacion" id = "texto-explicacion-analisis-consumo-personalziado">
+                <h3>
+                    Análisis de Consumo Personalizado
+                </h3>
+                <p> 
+                    Nuestra herramienta calcula el consumo de electricidad esperado basándose en el consumo medio de tu provincia y las condiciones climáticas locales. Cada dato climático, desde la temperatura hasta la humedad, se toma en cuenta para asegurar una previsión precisa.
+                </p>
+                <button class="btn-voz accesible" 
+                onclick="leerTexto('texto-explicacion-analisis-consumo-personalziado')" 
+                aria-label="Leer este texto en voz alta">
+                🔊</button>
             </div>
         </div>
+
+
         <div class="explicacion">
             <img src="images/Familia.svg" alt="Factores demográficos y del Hogar" class="ajuste-vector">
-            <div class="texto-explicacion">
-                <h3>Factores demográficos y del Hogar</h3>
-                <p>Para crear una estimación precisa y personalizada de tu consumo eléctrico, tomamos en cuenta varios factores esenciales de tu hogar. Analizamos el número de habitantes que residen en la vivienda, lo cual impacta directamente en el uso de los electrodomésticos y la demanda energética. Además, consideramos el tipo de vivienda, ya sea unifamiliar o un piso, ya que cada uno tiene patrones de consumo distintos debido a su estructura y aislamiento. También incluimos en el análisis la potencia contratada, que es fundamental para determinar el límite de consumo energético disponible, asegurando que nuestra estimación sea lo más ajustada posible a la realidad de tu hogar.
+            <div class="texto-explicacion" id="texto-explicacion-factores-demograficos">
+                <h3>
+                    Factores demográficos y del Hogar
+                </h3>
+                <p>
+                    Para crear una estimación precisa y personalizada de tu consumo eléctrico, tomamos en cuenta varios factores esenciales de tu hogar. Analizamos el número de habitantes que residen en la vivienda, lo cual impacta directamente en el uso de los electrodomésticos y la demanda energética. Además, consideramos el tipo de vivienda, ya sea unifamiliar o un piso, ya que cada uno tiene patrones de consumo distintos debido a su estructura y aislamiento. También incluimos en el análisis la potencia contratada, que es fundamental para determinar el límite de consumo energético disponible, asegurando que nuestra estimación sea lo más ajustada posible a la realidad de tu hogar.
                 </p>
+                <button class="btn-voz accesible" 
+                onclick="leerTexto('texto-explicacion-factores-demograficos')" 
+                aria-label="Leer este texto en voz alta">
+                🔊</button>
             </div>
         </div>
         <div class="explicacion">
             <img src="images/Optimizacion.svg" alt="Predicción y Optimización de Costos" class="ajuste-vector">
-            <div class="texto-explicacion">
-                <h3>Predicción y Optimización de Costos</h3>
-                <p>Mediante análisis de patrones y tendencias generales, nuestro sistema encuentra oportunidades para reducir el consumo. Además, te ayudamos a visualizar cómo influirán estos factores en tu factura mensual, proporcionando herramientas para optimizar tu consumo y reducir costos.</p>
+            <div class="texto-explicacion" id="texto-explicacion-prediccion-optimizacion-costos">
+                <h3>
+                    Predicción y Optimización de Costos
+                </h3>
+                <p>
+                    Mediante análisis de patrones y tendencias generales, nuestro sistema encuentra oportunidades para reducir el consumo. Además, te ayudamos a visualizar cómo influirán estos factores en tu factura mensual, proporcionando herramientas para optimizar tu consumo y reducir costos.
+                </p>
+                <button class="btn-voz accesible" 
+                onclick="leerTexto('texto-explicacion-prediccion-optimizacion-costos')" 
+                aria-label="Leer este texto en voz alta">
+                🔊</button>
             </div>
         </div>
     </section>
-   
-        <section class="reseñas">
-            <h2>Pasaron por TerraWatt, aquí sus opiniones</h2>
-            <div class="reseñas-encabezado">
-                <div class="reseñas-rating">
-                    <span class="rating-num">4,8</span>
-                    <span class="estrellas">★★★★★</span>
-                    <p>956 opiniones Google</p>
-                </div>
-            </div>
-            <div class="slides-reseñas-conjunto">
-                <div class="reseñas-slider" id="reseñas-slider">
-                    <div class="reseñas-individuales">
-                        <h3>Jaime</h3>
-                        <p>Hace 1 año</p>
-                        <p>El servicio fue muy bueno y me gustaría dar las gracias a Lidia, quien me guió en el proceso de cambio de proveedor de electricidad. Volveré a ellos cada vez que quiera cambiar.</p>
-                        <span class="reseña-rating">★★★★☆</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Cristian</h3>
-                        <p>Hace 1 año</p>
-                        <p>¡María fue increíble en todos los aspectos de nuestra llamada telefónica! Muchas gracias a ella. 👍</p>
-                        <span class="reseña-rating">★★★★★</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Emma</h3>
-                        <p>Hace 1 año</p>
-                        <p>Asesor de primera y muy receptivo. Tuve la oportunidad de hablar con Eduardo, quien supo orientarme y darme las explicaciones que necesitaba. Muchas gracias.</p>
-                        <span class="reseña-rating">★★★★★</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Deniz</h3>
-                        <p>Hace 2 años</p>
-                        <p>Nos ayudaron a entender por qué nuestra factura era muy alta, nos asesoraron cómo poder reducirla y analizaron si debía haber algún error. ¡Los recomendaría sin duda!</p>
-                        <span class="reseña-rating">★★★★★</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Alba</h3>
-                        <p>Hace 6 meses</p>
-                        <p>Muy amables y pacientes. Me explicaron todas las tarifas y cuáles eran las mejores opciones para mi hogar. Gran equipo.</p>
-                        <span class="reseña-rating">★★★★☆</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Pablo</h3>
-                        <p>Hace 9 meses</p>
-                        <p>¡Excelente servicio! Gracias a TerraWatt ahora sé cómo ahorrar en mi factura. Recomendados.</p>
-                        <span class="reseña-rating">★★★★★</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Lucía</h3>
-                        <p>Hace 3 meses</p>
-                        <p>Un servicio muy rápido y eficaz. Resolvieron todas mis dudas sobre el consumo y me recomendaron cambios que ya estoy notando en la factura.</p>
-                        <span class="reseña-rating">★★★★★</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Antonio</h3>
-                        <p>Hace 1 año</p>
-                        <p>El proceso fue un poco más lento de lo esperado, pero al final consiguieron mejores condiciones para mi contrato de electricidad. Contento con el resultado.</p>
-                        <span class="reseña-rating">★★★★☆</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Carmen</h3>
-                        <p>Hace 2 años</p>
-                        <p>Me ayudaron a cambiar de proveedor con mucha facilidad. Muy agradecida por el trato y la rapidez en gestionar todo.</p>
-                        <span class="reseña-rating">★★★★★</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Juan</h3>
-                        <p>Hace 8 meses</p>
-                        <p>El asesoramiento fue muy útil para conocer cómo optimizar la potencia contratada y reducir el costo mensual. Definitivamente, un buen servicio.</p>
-                        <span class="reseña-rating">★★★★☆</span>
-                    </div>
-                    <div class="reseñas-individuales">
-                        <h3>Sara</h3>
-                        <p>Hace 5 meses</p>
-                        <p>Buen servicio, aunque me costó un poco entender toda la información proporcionada. Aún así, conseguí ahorrar en mi factura de luz.</p>
-                        <span class="reseña-rating">★★★☆☆</span>
-                    </div>
-                </div>
-            </div>
-            <div class="navegacion-botones-reseñas">
-                <button type="boton" aria-label="Anterior" class="reseñas__control btn btn--dark-border" id="goPrevious">
-                    <span class="reseñas__flecha">&#8249;</span>
-                </button>
-                <button type="boton" aria-label="Siguiente" class="reseñas__control btn btn--dark-border" id="goNext">
-                    <span class="reseñas__flecha">&#8250;</span>
-                </button>
-            </div>
-        </section>
-        
 
+    <!-- En esta seccion vamos a definir el apartado de los slides de las reseñas estas tienen -->
+    <section class="reseñas">
+        <h2 id="reseñas-titulo">
+            Pasaron por TerraWatt, aquí sus opiniones
+            <button class="btn-voz accesible" 
+            onclick="leerTexto('reseñas-titulo')" 
+            aria-label="Leer título en voz alta">
+            🔊</button>
+        </h2>
+        <div class="reseñas-encabezado">
+            <div class="reseñas-rating">
+                <span class="rating-num">4,8</span>
+                <span class="estrellas">★★★★★</span>
+                <h2>956 opiniones Google</h2>
+            </div>
+        </div>
+        <div class="slides-reseñas-conjunto">
+            <div class="reseñas-slider" id="reseñas-slider">
+                <div class="reseñas-individuales" id="reseña1">
+                    <h3>
+                        Jaime
+                    </h3>
+                    <p>
+                        Hace 1 año
+                    </p>
+                    <p>
+                        El servicio fue muy bueno y me gustaría dar las gracias a Lidia, quien me guió en el proceso de cambio de proveedor de electricidad. Volveré a ellos cada vez que quiera cambiar.
+                    </p>
+                    <span class="reseña-rating">★★★★☆</span>
+
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña1')" aria-label="Leer reseña de Jaime">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña2">
+                    <h3>
+                        Cristian
+                    </h3>
+                    <p>
+                        Hace 1 año
+                    </p>
+                    <p>
+                        ¡María fue increíble en todos los aspectos de nuestra llamada telefónica! Muchas gracias a ella. 👍
+                    </p>
+                    <span class="reseña-rating">★★★★★</span>
+
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña2')" 
+                    aria-label="Leer reseña de Cristian">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña3">
+                    <h3>
+                        Emma
+                    </h3>
+                    <p>
+                        Hace 1 año
+                    </p>
+                    <p>
+                        Asesor de primera y muy receptivo. Tuve la oportunidad de hablar con Eduardo, quien supo orientarme y darme las explicaciones que necesitaba. Muchas gracias.
+                    </p>
+                    <span class="reseña-rating">★★★★★</span>
+                    
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña3')" 
+                    aria-label="Leer reseña de Emma">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña4">
+                    <h3>
+                        Deniz
+                    </h3>
+                    <p>
+                        Hace 2 años
+                    </p>
+                    <p>
+                        Nos ayudaron a entender por qué nuestra factura era muy alta, nos asesoraron cómo poder reducirla y analizaron si debía haber algún error. ¡Los recomendaría sin duda!
+                    </p>
+                    <span class="reseña-rating">★★★★★</span>
+                    
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña4')" 
+                    aria-label="Leer reseña de Deniz">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña5">
+                    <h3>
+                        Alba
+                    </h3>
+                    <p>
+                        Hace 6 meses
+                    </p>
+                    <p>
+                        Muy amables y pacientes. Me explicaron todas las tarifas y cuáles eran las mejores opciones para mi hogar. Gran equipo.
+                    </p>
+                    <span class="reseña-rating">★★★★☆</span>
+
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña5')" 
+                    aria-label="Leer reseña de Alba">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña6">
+                    <h3>
+                        Pablo
+                    </h3>
+                    <p>
+                        Hace 9 meses
+                    </p>
+                    <p>
+                        ¡Excelente servicio! Gracias a TerraWatt ahora sé cómo ahorrar en mi factura. Recomendados.
+                    </p>
+                    <span class="reseña-rating">★★★★★</span>
+                    
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña6')" 
+                    aria-label="Leer reseña de Pablo">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña7">
+                    <h3>
+                        Lucía
+                    </h3>
+                    <p>
+                        Hace 3 meses
+                    </p>
+                    <p>
+                        Un servicio muy rápido y eficaz. Resolvieron todas mis dudas sobre el consumo y me recomendaron cambios que ya estoy notando en la factura.
+                    </p>
+                    <span class="reseña-rating">★★★★★</span>
+                   
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña7')" 
+                    aria-label="Leer reseña de Lucia">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña8">
+                    <h3>
+                        Antonio
+                    </h3>
+                    <p>
+                        Hace 1 año
+                    </p>
+                    <p>
+                        El proceso fue un poco más lento de lo esperado, pero al final consiguieron mejores condiciones para mi contrato de electricidad. Contento con el resultado.
+                    </p>
+                    <span class="reseña-rating">★★★★☆</span>
+                    
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña8')" 
+                    aria-label="Leer reseña de Antonio">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña9">
+                    <h3>
+                        Carmen
+                    </h3>
+                    <p>
+                        Hace 2 años
+                    </p>
+                    <p>
+                        Me ayudaron a cambiar de proveedor con mucha facilidad. Muy agradecida por el trato y la rapidez en gestionar todo.
+                    </p>
+                    <span class="reseña-rating">★★★★★</span>
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña9')" 
+                    aria-label="Leer reseña de Carmen">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña10">
+                    <h3>
+                        Juan
+                    </h3>
+                    <p>
+                        Hace 8 meses
+                    </p>
+                    <p>
+                        El asesoramiento fue muy útil para conocer cómo optimizar la potencia contratada y reducir el costo mensual. Definitivamente, un buen servicio.
+                    </p>
+                    <span class="reseña-rating">★★★★☆</span>
+
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña10')" 
+                    aria-label="Leer reseña de Juan">
+                    🔊</button>
+                </div>
+
+                <div class="reseñas-individuales" id="reseña11">
+                    <h3>
+                        Sara
+                    </h3>
+                    <p>
+                        Hace 5 meses
+                    </p>
+                    <p>
+                        Buen servicio, aunque me costó un poco entender toda la información proporcionada. Aún así, conseguí ahorrar en mi factura de luz.
+                    </p>
+                    <span class="reseña-rating">★★★☆☆</span>
+
+                    <button class="btn-voz accesible" 
+                    onclick="leerTexto('reseña11')" 
+                    aria-label="Leer reseña de Deniz">
+                    🔊</button>
+            </div>
+        </div>
+
+        <!-- Ahora definimos los botones para poder pasar a la siguiente reseña o volver a la enterior, definimos el tipode elemento, la etiqueta que queremos ponerle para mejorar su acceisbilidad y poder entender mejor que hace el boton, damos estilo a los botones y les establecemos un ID, para que sea reconocible por la funcion en js y pueda hacer el movimiento de siguiente o anterior.  -->
+        <div class="navegacion-botones-reseñas">
+            <button type="button" 
+            aria-label="Anterior" 
+            class="reseñas__control btn btn--dark-border" 
+            id="goPrevious">
+
+            <!-- El numero de &#8249 nos da el elemento dela flecha < prederminado que incluye html  -->
+                <span class="reseñas__flecha">&#8249;</span>
+            </button>
+            <button type="button" 
+            aria-label="Siguiente" 
+            class="reseñas__control btn btn--dark-border" 
+            id="goNext">
+
+            <!-- El numero de &#8250 nos da el elemento dela flecha < prederminado que incluye html  -->
+                <span class="reseñas__flecha">&#8250;</span>
+            </button>
+        </div>
     </section>
-    <script src="Funciones/botones.js"></script>
-    <section>
-        <div id="footer-placeholder"></div>
-    <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
-</section>
     
+    <!-- Este script nos permite  que los botones de anterior y siguiente de las reseñas, sean funcionales -->
+    <script src="Funciones/Boton_siguiente_anterior_reseñas.js"></script>
+
+    <!-- Como hemos explicado al principio este script nos permite poner el pie de página automaticamente -->
+    <section>    
+        <div id="footer-placeholder"></div>
+        <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+    </section>
+
+    <!-- Definimos a siguiente seccion en el boton que te lleva al principio de la pagina, y añadimos tambien el script que nos permite que esto sea posible -->
+    <section>
+        <div id="boton-placeholder"></div>
+        <script src="Funciones/Boton_subir.js"></script>
+    </section>
     
 </body>
+</html>

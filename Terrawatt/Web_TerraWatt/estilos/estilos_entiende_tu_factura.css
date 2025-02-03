@@ -1,5 +1,7 @@
+/* Importación de la fuente */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -10,9 +12,13 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
-/* Encabezado */
+/* ==========================
+    ENCABEZADO
+========================== */
 .encabezado2 {
     background-color: rgb(145, 226, 248);
     min-height: 50vh;
@@ -21,44 +27,44 @@ body {
     background-position: right 13% bottom 70%;
     background-size: 25%;
     padding-bottom: 9rem;
+
+    
 }
 
 .encabezado-contenido2 {
     margin-left: 10%;
     margin-top: 6%;
 }
+
 .encabezado-contenido2 h1 {
     font-size: 50px;
     color: rgb(11, 72, 126);
     text-transform: uppercase;
     margin-bottom: 0.5vw;
 }
-.encabezado-contenido2 h2 {
-    font-size: 20px;
-    color: rgb(0, 0, 0);
-    margin-bottom: 0.5vw;
-}
+
+.encabezado-contenido2 h2,
 .encabezado-contenido2 h3 {
     font-size: 18px;
-    color: rgb(0, 0, 0);
+    color: #000;
     margin-bottom: 0.5vw;
 }
 
-/* Contenedor principal de la secciones de ambas facturas ya que tienen el estilo común para las 4 páginas de esta */
-
+/* ==========================
+    SECCIÓN FACTURAS
+========================== */
 .seccion-facturas {
     width: 100%;
-    height: auto; 
-    background-color: #f9f9f9; 
     display: flex;
-    justify-content: center; 
-    align-items: flex-start; 
-    padding: 20px 0; 
-    gap: 20px; 
-    box-sizing: border-box; 
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 0;
+    gap: 20px;
 }
 
-/* Diseño para las páginas */
+/* ==========================
+    DISEÑO DE PÁGINAS
+========================== */
 .factura {
     position: relative;
     width: 500px;
@@ -68,37 +74,26 @@ body {
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     margin: 10px;
     background-size: calc(100% - 40px) calc(100% - 40px);
+
 }
 
-/* Página 1  */
-.factura-pagina-1 .factura {
-    background-image: url('../images/factura_alba-1_tachado-1.svg'); 
-}
+/* Fondos de cada factura */
+.factura-pagina-1 .factura { background-image: url('../images/factura_alba-1_tachado-1.svg'); }
+.factura-pagina-2 .factura { background-image: url('../images/factura_alba-2-1.svg'); }
+.factura-pagina-3 .factura { background-image: url('../images/factura_alba-3-1.svg'); }
+.factura-pagina-4 .factura { background-image: url('../images/factura_alba-5-1.svg'); }
 
-/* Página 2  */
-.factura-pagina-2 .factura {
-    background-image: url('../images/factura_alba-2-1.svg'); 
-}
-
-/* Página 3  */
-.factura-pagina-3 .factura {
-    background-image: url('../images/factura_alba-3-1.svg'); 
-}
-
-/* Página 4  */
-
-.factura-pagina-4 .factura {
-    background-image: url('../images/factura_alba-5-1.svg'); 
-}
-/* Estilo general para las secciones de cada página */
+/* ==========================
+    ESTILO DE SECCIONES (Facturas)
+========================== */
 .factura-section {
-    background-color: rgba(76, 175, 80, 0.1); 
-    border: 1px solid #4caf50; 
+    background-color: rgba(76, 175, 80, 0.1);
+    border: 1px solid #4caf50;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -107,126 +102,46 @@ body {
     font-size: 14px;
     color: #333;
     padding: 10px;
-    cursor: pointer; 
-    animation: parpadeo 2s ease-in-out infinite;
-    will-change: background-color, box-shadow;
-    transform: translateZ(0);
+    cursor: pointer;
+    /* animation: parpadeo 2s ease-in-out infinite; */
 }
 
-/* Ahora vamos a definir para clase (o ventana emergente que queramos tener en cada una de nuetsras páginas su posición para poder ajustarla a nuestras necesidades */
-.factura-section.datos_personales {
-    position: absolute; 
-    top: 4%; 
-    left: 50%; 
-    width: 45%; 
-    height: 10%; 
+/* Resaltar foco en navegación por teclado */
+.factura-section:focus {
+    outline: 3px solid blue;
+    background-color: rgba(76, 175, 80, 0.3);
+}
+
+/* ==========================
+    POSICIONES ESPECÍFICAS DE LAS SECCIONES
+========================== */
+.factura-section {
+    position: absolute;
     box-sizing: border-box;
 }
 
-.factura-section.resumen {
-    position: absolute; 
-    top: 23.5%; 
-    left: 9%; 
-    width: 87%; 
-    height: 13%; 
-    box-sizing: border-box;
-}
+.factura-section.datos_personales { top: 4%; left: 50%; width: 45%; height: 10%; }
+.factura-section.resumen { top: 23.5%; left: 9%; width: 87%; height: 13%; }
+.factura-section.consumo_total { top: 40%; left: 9%; width: 43%; height: 20%; }
+.factura-section.evolucion_consumo { top: 40%; left: 55%; width: 40%; height: 23%; }
+.factura-section.datos { top: 4%; left: 9%; width: 85%; height: 14%; }
+.factura-section.detalles { top: 18.5%; left: 9%; width: 43%; height: 20%; }
+.factura-section.informacion_consumo { top: 29.5%; left: 52%; width: 43%; height: 10%; }
+.factura-section.detalles_de_la_factura { top: 6%; left: 9%; width: 85%; height: 16%; }
+.factura-section.resumen_total { top: 24%; left: 9%; width: 85%; height: 10%; }
+.factura-section.graficos { top: 6%; left: 9%; width: 85%; height: 32%; }
 
-.factura-section.consumo_total {
-    position: absolute; 
-    top: 40%; 
-    left: 9%; 
-    width: 43%; 
-    height: 20%; 
-    box-sizing: border-box;
-}
-
-.factura-section.evolucion_consumo {
-    position: absolute; 
-    top: 40%; 
-    left: 55%; 
-    width: 40%; 
-    height: 23%; 
-    box-sizing: border-box;
-}
-
-.factura-section.datos {
-    position: absolute;
-    top: 4%;
-    left: 9%;
-    width: 85%;
-    height: 14%; 
-}
-
-.factura-section.detalles {
-    position: absolute;
-    top: 18.5%;
-    left: 9%;
-    width: 43%;
-    height: 20%; 
-}
-
-.factura-section.informacion_consumo {
-    position: absolute;
-    top: 29.5%;
-    left: 52%;
-    width: 43%;
-    height: 10%; 
-}
-
-.factura-section.detalles_de_la_factura {
-    position: absolute;
-    top: 6%;
-    left: 9%;
-    width: 85%;
-    height: 16%; 
-}
-
-.factura-section.resumen_total {
-    position: absolute;
-    top: 24%;
-    left: 9%;
-    width: 85%;
-    height: 10%; 
-}
-
-.factura-section.graficos {
-    position: absolute;
-    top: 6%;
-    left: 9%;
-    width: 85%;
-    height: 32%; 
-}
-
-/* Definimos los parpadeos de cada uno de estos recuadros  */
+/* ==========================
+    ANIMACIÓN PARPADEO
+========================== */
 @keyframes parpadeo {
-    0%, 100% { 
-        background-color: rgba(76, 175, 80, 0.1);
-        box-shadow: none;
-    }
-    50% { 
-        background-color: rgba(76, 175, 80, 0.3);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
+    0%, 100% { background-color: rgba(76, 175, 80, 0.1); }
+    50% { background-color: rgba(76, 175, 80, 0.2); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
 }
 
-/* Subapartados dentro del modal */
-.modal-content ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-}
-
-.modal-content ul li {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 5px;
-}
-
-
-
-/* Ventanas emergentes y sus configuraciones de color, equis... */
+/* ==========================
+    MODAL (Ventana emergente)
+========================== */
 .modal {
     display: none;
     position: fixed;
@@ -245,20 +160,86 @@ body {
     padding: 20px;
     border-radius: 8px;
     width: 80%;
-    max-width: 1000;
+    max-width: 1000px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     position: relative;
 }
 
+/* Botón de cerrar */
 .close {
     position: absolute;
-    top: 1px;
-    right: 10px;
-    font-size: 40px;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    background: none;
+    border: none;
     cursor: pointer;
     color: #333;
 }
 
-.close:hover {
+.close:hover, .close:focus {
     color: red;
+    outline: 2px solid red;
 }
+
+/* ==========================
+    CONTENIDO DEL MODAL
+========================== */
+#modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: rgb(11, 72, 126);
+    margin-bottom: 10px;
+}
+
+#modal-info {
+    font-size: 16px;
+    font-weight: 400;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+#modal-subinfo {
+    font-size: 16px;
+    font-weight: 300;
+    color: #555;
+    line-height: 1.6;
+    padding-left: 20px;
+}
+
+/* Listas dentro del modal */
+#modal-subinfo ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+#modal-subinfo li {
+    font-size: 16px;
+    font-weight: 300;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Enlaces dentro del modal */
+#modal-info a, #modal-subinfo a {
+    color: rgb(11, 72, 126);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#modal-info a:hover, #modal-subinfo a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================
+    EFECTO DE APARICIÓN DEL MODAL
+========================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+
+

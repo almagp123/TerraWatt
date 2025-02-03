@@ -11,6 +11,8 @@
 </head>
 
 <body>
+    <!-- Botón de Modo Accesible -->
+    <button id="toggleAccesible" aria-label="Activar modo accesible">🦻 Modo Accesible</button>
     <section>
             <div id="header-placeholder"></div>
         <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
@@ -18,19 +20,22 @@
     </section>
         <header class="encabezado2">
             <div class="encabezado-contenido2">
-                <h1><br>
+                <h1 id="texto-titulo"><br>
                     Te ayudamos a entender 
                     <br> tus facturas! 
+                    <button class="btn-voz accesible" onclick="leerTexto('texto-titulo')" aria-label="Leer título en voz alta">🔊</button>
                 </h1>
-                <h2>
+                <h2 id="texto-titulo2">
                     Gracias a nuestras facturas interactivas entenderas a la perfección 
                     <br>
                      cada apartado de tus facturas. 
+                     <button class="btn-voz accesible" onclick="leerTexto('texto-titulo2')" aria-label="Leer título en voz alta">🔊</button>
                 </h2>
-                <h3>
+                <h3 id="texto-titulo3">
                     Te será más fácil poder entenderlas, si aún así tienes dudas
                     <br>
                     no dudes en contactarnos!
+                    <button class="btn-voz accesible" onclick="leerTexto('texto-titulo3')" aria-label="Leer título en voz alta">🔊</button>
                 </h3>
 
             </div>
@@ -43,14 +48,14 @@
             <div class="seccion-facturas">
                 <!-- Página 1 -->
                 <div class="factura-pagina-1">
-                    <div class="factura">
-                        <div class="factura-section datos_personales" 
+                    <div class="factura" >
+                        <div class="factura-section datos_personales" tabindex="0" role="button"
                             data-title="Datos de la factura" 
                             data-info="En este apartado podremos visualizar nuestros datos personales así como cuál es el periodo de nuestra factura de la luz, en este caso como podemos ver es de 36 días." 
                             data-subinfo="Periodo: 36 días, Fecha de emisión: 09/12/2024">
                         </div>
 
-                        <div class="factura-section resumen" 
+                        <div class="factura-section resumen" tabindex="0"
                             data-title="Resumen de la factura"
                             data-info="El resumen de la factura de electricidad detalla cómo se compone el costo total de tu consumo energético. En esta sección puedes encontrar
                             Potencia Contratada: El coste fijo asociado a la potencia que tienes contratada, expresado en euros.
@@ -60,12 +65,12 @@
                             Otros Cargos: Otros conceptos adicionales que puedan aplicarse, como servicios extra contratados.
                             Forma de Pago: Información sobre el método de pago, como domiciliación bancaria, IBAN y datos relacionados.">
                         </div>
-                        <div class="factura-section consumo_total" 
+                        <div class="factura-section consumo_total" tabindex="0"
                             data-title="Consumo Total" 
                             data-info="En este caso podemos ver el conusmo en kWh total en en nuestro periodo, así como el precio medio del kWh que hemos pagado." 
                             data-subinfo="Periodo: 36 días, Precio medio del kWh: 0.089272€">
                         </div>
-                        <div class="factura-section evolucion_consumo" 
+                        <div class="factura-section evolucion_consumo" tabindex="0"
                             data-title="Evolución del consumo" 
                             data-info="Podemos ver la evolución de nuestro consumo en función de los meses en los cuales la distribuidora haya monitorizado nuetsro consumo. " 
                             data-subinfo="Periodo: 36 días, Precio medio del kWh: 0.089272€">
@@ -76,7 +81,7 @@
                 <!-- Página 2 -->
                 <div class="factura-pagina-2">
                     <div class="factura">
-                        <div class="factura-section datos" 
+                        <div class="factura-section datos" tabindex="0"
                         data-title="Datos del contrato" 
                         data-info="Los datos del contrato de electricidad incluyen información específica relacionada con el suministro eléctrico y las condiciones del contrato del usuario.
 
@@ -96,7 +101,7 @@
                         Nº contador: Número único del contador de electricidad que mide el consumo eléctrico del usuario."
                         data-subinfo="Potencia contratada: 2.5kWh">
                         </div>
-                        <div class="factura-section detalles"
+                        <div class="factura-section detalles" tabindex="0"
                             data-title="Detalles de la factura" 
                             data-info="
                             - Pot. Punta: Este concepto detalla el costo asociado a la potencia contratada en el horario de mayor demanda. En el ejemplo, se refleja un costo unitario de 0,089431 Eur/kW x 35 días, que resulta en un total de 8,95 €.
@@ -115,7 +120,7 @@
                             Total: El precio final, sumando todos los conceptos anteriores, asciende a 26,42 €."
                             data-subinfo="Potencia contratada: 2.5kWh">
                         </div>
-                        <div class="factura-section informacion_consumo"
+                        <div class="factura-section informacion_consumo" tabindex="0"
                             data-title="Información del consumo" 
                             data-info=" Datos del consumo eléctrico durante el período del 08/10/2024 al 13/11/2024
                             Lectura real: La medición inicial y final registrada por el contador durante el período facturado. En este ejemplo:
@@ -147,7 +152,7 @@
                 <!-- Página 3 -->
                 <div class="factura-pagina-3">
                     <div class="factura">
-                        <div class="factura-section detalles_de_la_factura" 
+                        <div class="factura-section detalles_de_la_factura" tabindex="0"
                             data-title="Datos de la factura" 
                             data-info="Período: Se considera el intervalo de tiempo específico en el que se mide el consumo eléctrico, que en este caso es del 08/10/2024 al 13/11/2024.
                         
@@ -172,7 +177,7 @@
                             data-subinfo="Periodo: 36 días, Fecha de emisión: 09/12/2024">
                         </div>
 
-                        <div class="factura-section resumen_total" 
+                        <div class="factura-section resumen_total" tabindex="0"
                             data-title="Resumen total de las facturas"
                             data-info="
                             Factura de Electricidad:
@@ -193,7 +198,7 @@
                 <!-- Página 4 -->
                 <div class="factura-pagina-4">
                     <div class="factura">
-                        <div class="factura-section graficos" 
+                        <div class="factura-section graficos" tabindex="0"
                         data-title="Gráficos" 
                         data-info="    Origen de la electricidad:
 
@@ -222,9 +227,9 @@
         </section>
     
         <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2 id="modal-title"></h2>
+            <div class="modal-content" tabindex="0">
+                <span class="close" tabindex="0" >&times; </span>
+                <h1 id="modal-title"></h1>
                 <p id="modal-info"></p>
                 <ul id="modal-subinfo"></ul> 
             </div>
@@ -237,9 +242,12 @@
             <script src="Funciones/Estilo_botones_texto.js"></script>
         </div>       
     </section>
-    <section>
-        <div id="footer-placeholder"></div>
+    <div id="footer-placeholder"></div>
     <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+    <div id="boton-placeholder"></div>
+    <script src="Funciones/Boton_subir.js"></script>
+    <script src="Funciones/accesibilidad.js"></script>
+
 </section>
     
 <body>

@@ -47,7 +47,7 @@ body {
 .botones {
     /* display: flex; 
     justify-content: space-between;  */
-    display: grid; /* Activa CSS Grid */
+    display: grid; 
     grid-template-columns: 1fr 1fr; 
     gap: 10px; 
     margin-top: 15px;
