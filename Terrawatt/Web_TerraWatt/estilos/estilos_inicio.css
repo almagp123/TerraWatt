@@ -12,32 +12,47 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+/* Cabecera */
+.cabecera {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    z-index: 1000;
+    top: 0;
+}
 
 /* Encabezado */
-
 .encabezado {
-    /* position: absolute; */
-
-    background-color: #105F75;
+    background: #105F75 url('../images/Vector_pag_principal.svg') right 10% bottom 70%/40% no-repeat;
     min-height: 50vh;
-    background-image: url('../images/Vector_pag_principal.svg');
-    background-repeat: no-repeat;
-    background-position: right 10% bottom 70%;
-    background-size: 40%;
     padding-bottom: 9rem;
-    width: 100%;
+    clip-path: polygon(100% 0%,0% 0%,0% 98%,1% 97.98%,2% 97.9%,3% 97.8%,4% 97.65%,5% 97.45%,6% 97.23%,7% 96.95%,8% 96.63%,9% 96.28%,10% 95.9%,11% 95.48%,12% 95.03%,13% 94.55%,14% 94.05%,15% 93.53%,16% 93%,17% 92.45%,18% 91.9%,19% 91.33%,20% 90.75%,21% 90.18%,22% 89.6%,23% 89.03%,24% 88.45%,25% 87.9%,26% 87.38%,27% 86.88%,28% 86.38%,29% 85.9%,30% 85.45%,31% 85.05%,32% 84.68%,33% 84.33%,34% 84.03%,35% 83.75%,36% 83.53%,37% 83.33%,38% 83.18%,39% 83.08%,40% 83.03%,41% 83%,42% 83.03%,43% 83.1%,44% 83.23%,45% 83.38%,46% 83.58%,47% 83.83%,48% 84.1%,49% 84.43%,50% 84.78%,51% 85.18%,52% 85.6%,53% 86.05%,54% 86.53%,55% 87.03%,56% 87.55%,57% 88.08%,58% 88.65%,59% 89.2%,60% 89.78%,61% 90.35%,62% 90.93%,63% 91.5%,64% 92.08%,65% 92.63%,66% 93.18%,67% 93.7%,68% 94.23%,69% 94.7%,70% 95.18%,71% 95.6%,72% 96.03%,73% 96.4%,74% 96.73%,75% 97.03%,76% 97.3%,77% 97.53%,78% 97.7%,79% 97.85%,80% 97.93%,81% 98%,82% 98%,83% 97.95%,84% 97.88%,85% 97.75%,86% 97.6%,87% 97.38%,88% 97.13%,89% 96.85%,90% 96.53%,91% 96.15%,92% 95.75%,93% 95.33%,94% 94.88%,95% 94.4%,96% 93.9%,97% 93.38%,98% 92.83%,99% 92.28%,100% 91.7%);
+}
 
+@media (max-width: 1025px) {
+    .encabezado {
+        background-position: right 10% bottom 10%;
+        clip-path: none;
+    }
+}
+
+@media (max-width: 1020px) {
+    .encabezado {
+        background-image: none;
+    }
 }
 
 .encabezado-contenido {
-
-    margin-left: 10%;
-    margin-top: 5%;
+    margin: 5% 0 0 10%;
 }
 
 .encabezado-contenido h1 {
     font-size: 40px;
-    color: rgb(252, 252, 252);
+    color: #fcfcfc;
     text-transform: uppercase;
     margin-bottom: 35px;
 }
@@ -47,30 +62,22 @@ body {
     display: inline-block;
     padding: 11px 35px;
     background-color: bisque;
-    color: rgb(0, 0, 0);
+    color: #000;
     text-transform: uppercase;
 }
 
 .encabezado-contenido a:hover {
-    background-color: rgb(255, 255, 255);
-}
-
-.ola-diseno-vector {
-    position: absolute;
-    min-height: 40vh;
-    width: 100%;
+    background-color: #fff;
 }
 
 .rating-encabezado {
     display: flex;
     align-items: center;
     font-size: 1.2rem;
-    color: #333;
-    margin-top: 20px;
-    margin-left: 10%;
+    margin: 20px 0 0 10%;
 }
 
-.rating-encabezado .estrellas {
+.estrellas {
     display: flex;
     margin-right: 10px;
 }
@@ -80,16 +87,15 @@ body {
     font-size: 1.5rem;
     margin-right: 2px;
 }
-li, span{
-    color: white; 
+
+li, span {
+    color: white;
 }
 
 /* Introducción */
-
 .introduccion {
-    margin-top: 5%;
     text-align: center;
-    padding: 50px 20px;
+    margin-top: 5%;
 }
 
 .introduccion h2 {
@@ -99,24 +105,18 @@ li, span{
 
 .explicacion {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     max-width: 900px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 40px;
     padding: 20px;
     background: #f9f9f9;
     border-radius: 10px;
 }
 
 .ajuste-vector {
-    width: 40%;
     max-width: 300px;
     height: auto;
-}
-
-.texto-explicacion {
-    width: 55%;
-    text-align: left;
 }
 
 .texto-explicacion h3 {
@@ -125,20 +125,14 @@ li, span{
 }
 
 .texto-explicacion p {
-    font-size: 1em;
     line-height: 1.6;
 }
 
 /* Reseñas */
-
 .reseñas {
     background-color: #e0f4ff;
     padding: 40px;
     text-align: center;
-}
-
-.reseñas-encabezado {
-    margin-bottom: 20px;
 }
 
 .reseñas-encabezado h2 {
@@ -153,49 +147,34 @@ li, span{
     align-items: center;
 }
 
-.reseñas-rating .rating-num {
+.rating-num {
     font-weight: bold;
     color: #00334e;
 }
 
-.reseñas-rating .estrellas {
-    /* color: #ffa500; */
-    color: #C70000;
-    font-size: 20px;
-}
-
 .slides-reseñas-conjunto {
     overflow: hidden;
-    width: 100%;
-    position: relative;
     margin-top: 40px;
-    scrollbar-width: none;
 }
 
 .reseñas-slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
     gap: 20px;
-    padding: 20px;
 }
 
 .reseñas-individuales {
     min-width: 415px;
-    max-width: 416px;
-    margin: 0 auto;
     background: #e6f7ff;
     padding: 20px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
-    box-sizing: border-box;
     text-align: left;
-    transition: transform 0.3s ease-in-out;
 }
 
 .reseñas-individuales h3 {
     font-weight: bold;
     font-size: 18px;
-    color: #000000;
     margin-bottom: 10px;
 }
 
@@ -205,39 +184,32 @@ li, span{
     margin-bottom: 10px;
 }
 
-.reseña-rating {
-    font-size: 20px;
+.reseña-rating  {
     color: #C70000;
+    font-size: 20px;
+}
+.estrellas {
+    color: #C70000;
+    font-size: 20px;
 }
 
 .navegacion-botones-reseñas {
     margin-top: 20px;
     text-align: center;
-    align-items: center;
 }
 
 .reseñas__control {
     background-color: #00334e;
-    color: #ffffff;
+    color: #fff;
     border: none;
     padding: 15px;
     border-radius: 20%;
     font-size: 24px;
     margin: 0 15px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    align-self: center;
+    transition: background-color 0.3s ease;
 }
 
 .reseñas__control:hover {
     background-color: #f0f0f0;
     color: #00334e;
-}
-
-.reseñas__flecha {
-    font-size: 20px;
-    color: #ffffff;
-}
-
-.slides-reseñas-conjunto::-webkit-scrollbar {
-    display: none;
 }

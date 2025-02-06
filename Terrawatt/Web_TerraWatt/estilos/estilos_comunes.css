@@ -12,80 +12,217 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Cabecera */
 
+
+
+/* Cabecera */
 .cabecera {
     background-color: #fff;
     position: fixed;
-    /* position: sticky; */
-
-    display: flex; 
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
     z-index: 1000;
     top: 0;
-    padding: 0% 5%;    
+}
+
+/* Contenedor para el logo y el texto "TerraWatt" */
+.logo-container {
+    display: flex;
     align-items: center;
-    
-} 
-
-nav.barra-navegacion {
-    padding: 0 20px; 
+    gap: 1rem; /* Espacio entre el logo y el texto */
 }
 
-
-.cabecera .barra-navegacion ul {
-    display: flex; 
+.logo-container img {
+    width: 7vw; /* Tamaño del logo */
+    min-width: 80px; /* Tamaño mínimo para evitar que sea demasiado pequeño */
 }
 
-.cabecera .barra-navegacion ul li a {
-    font-size: 20px;
-    padding: 20px;
+.logo-container span {
+    color: rgb(11, 72, 126);
+    font-size: 1.5rem;
+    font-weight: 800;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/* Barra de navegación */
+.barra-navegacion ul {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Espacio entre los elementos del menú */
+}
+
+.barra-navegacion ul li a {
+    font-size: 1.2rem;
     color: rgb(16, 88, 152);
-    display: block;
     font-weight: 600;
     white-space: nowrap;
+    transition: color 0.3s ease;
 }
 
-.cabecera .barra-navegacion ul li a:hover {
+.barra-navegacion ul li a:hover {
     color: rgb(0, 0, 0);
 }
 
-
-.barra-navegacion span {
-    color: rgb(11, 72, 126);
-    font-size: 25px;
-    font-weight: 800;
-    margin-right: 10vw;
-}
-
+/* Botón de llamar */
 .boton-llamar-barra-navegacion {
-    margin: 1vw 10vw 0 15px;
+    margin-left: 1rem;
 }
 
 .boton-llamar {
-    background-color: #00bfff; 
+    background-color: #00bfff;
     color: #000000;
     border: none;
-    padding: 10px;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
     display: flex;
     align-items: center;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    min-width: 10vw;
-    position: fixed;
-    font-size: 17px;
+    font-size: 1.2rem;
 }
 
 .boton-llamar i {
-    margin-right: 10px; 
+    margin-right: 0.5rem;
 }
 
 .boton-llamar:hover {
     background-color: #008fcc;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
-    
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* Media Queries para hacerlo responsive */
+@media (max-width: 1030px) {
+    .cabecera {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .logo-container {
+        margin-bottom: 1rem; /* Espacio debajo del logo y el texto */
+    }
+
+    .barra-navegacion ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .boton-llamar-barra-navegacion {
+        margin: 1rem 0 0 0;
+    }
+
+    .boton-llamar {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-container img {
+        width: 80px; /* Tamaño fijo para pantallas pequeñas */
+    }
+
+    .logo-container span {
+        font-size: 1.2rem; /* Tamaño de fuente más pequeño */
+    }
+
+    .barra-navegacion ul li a {
+        font-size: 0.9rem;
+    }
+
+    .boton-llamar {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+
+
+/* Estilos del botón hamburguesa */
+.hamburguesa {
+    display: none; /* Oculto por defecto */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.hamburguesa-linea {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #105F75;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Menú activo - Transformar en X */
+.hamburguesa.active .hamburguesa-linea:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburguesa.active .hamburguesa-linea:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburguesa.active .hamburguesa-linea:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Estilos responsive */
+@media (max-width: 1030px) {
+    .hamburguesa {
+        display: block; /* Mostrar botón en móviles */
+    }
+
+    .barra-navegacion {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .barra-navegacion.active {
+        max-height: 500px; /* Altura suficiente para el menú */
+    }
+
+    .menu {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .menu li {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .boton-llamar {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Pie de página */
@@ -155,7 +292,7 @@ nav.barra-navegacion {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #003366; /* Azul oscuro */
+    background-color: #003366; 
     color: white;
     border: none;
     padding: 10px 20px;
@@ -165,20 +302,21 @@ nav.barra-navegacion {
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    display: none; /* Oculto por defecto */
+    display: none; 
 }
 
 #backToTop:hover {
-    background-color: #002244; /* Azul más oscuro */
+    background-color: #002244; 
 }
 
 #backToTop:focus {
-    outline: 2px solid white; /* Para accesibilidad */
+    outline: 2px solid white; 
 }
 
 /* Animación de aparición */
 #backToTop.show {
     display: block;
+    position: fixed;
     opacity: 1;
     transform: translateY(0);
 }
