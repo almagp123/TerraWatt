@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.toggle("modo-accesible");
     });
     window.leerTexto = function (id) {
-        let texto = document.getElementById(id).innerText;
+        // let texto = document.getElementById(id).innerText;
+        let texto = document.getElementById(id).textContent;
         let speech = new SpeechSynthesisUtterance();
         speech.text = texto;
         speech.lang = "es-ES";

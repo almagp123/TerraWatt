@@ -54,7 +54,7 @@ body {
     font-size: 40px;
     color: #fcfcfc;
     text-transform: uppercase;
-    margin-bottom: 35px;
+    /* margin-bottom: 35px; */
 }
 
 .encabezado-contenido a {
@@ -100,7 +100,7 @@ li, span {
 
 .introduccion h2 {
     font-size: 2em;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
 }
 
 .explicacion {
@@ -129,10 +129,12 @@ li, span {
 }
 
 /* Reseñas */
+
 .reseñas {
     background-color: #e0f4ff;
     padding: 40px;
     text-align: center;
+    position: relative;
 }
 
 .reseñas-encabezado h2 {
@@ -159,17 +161,22 @@ li, span {
 
 .reseñas-slider {
     display: flex;
+}
+
+.reseñas-slider {
+    display: flex;
     transition: transform 0.5s ease-in-out;
     gap: 20px;
 }
 
 .reseñas-individuales {
-    min-width: 415px;
+    flex: 0 0 100%;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
     background: #e6f7ff;
-    padding: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
-    text-align: left;
+
 }
 
 .reseñas-individuales h3 {
@@ -182,6 +189,27 @@ li, span {
     font-size: 16px;
     color: #00334e;
     margin-bottom: 10px;
+} 
+
+.reseñas-navegacion {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.reseñas-boton {
+    background-color: #00334e;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.reseñas-boton:hover {
+    background-color: #005f9e;
 }
 
 .reseña-rating  {
