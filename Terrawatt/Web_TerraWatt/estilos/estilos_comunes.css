@@ -32,26 +32,26 @@ body {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Espacio entre el logo y el texto */
+    gap: 1rem; 
 }
 
 .logo-container img {
-    width: 7vw; /* Tamaño del logo */
-    min-width: 80px; /* Tamaño mínimo para evitar que sea demasiado pequeño */
+    width: 7vw;
+    min-width: 80px; 
 }
 
 .logo-container span {
     color: rgb(11, 72, 126);
     font-size: 1.5rem;
     font-weight: 800;
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    white-space: nowrap; 
 }
 
 /* Barra de navegación */
 .barra-navegacion ul {
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Espacio entre los elementos del menú */
+    gap: 1.5rem; 
 }
 
 .barra-navegacion ul li a {
@@ -198,6 +198,7 @@ body {
         top: 10px;
         left: 10px;
         z-index: 9999; 
+        direction: ltr;
     }
     .idioma-menu img {
         width: 20px; 
@@ -386,6 +387,11 @@ body {
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     display: none; 
 }
+:lang(ar) #backToTop {
+    right: auto; 
+    left: 20px; 
+}
+
 
 #backToTop:hover {
     background-color: #002244; 
@@ -402,9 +408,6 @@ body {
     opacity: 1;
     transform: translateY(0);
 }
-
-
-
 
 /* 🔹 Ocultar iconos de altavoz por defecto */
 .accesible {
@@ -433,6 +436,11 @@ body.modo-accesible .accesible {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: background 0.3s;
 }
+:lang(ar) #toggleAccesible {
+    left: auto; 
+    right: 20px; 
+}
+
 #toggleAccesible:hover {
     background-color: #003366;
 }

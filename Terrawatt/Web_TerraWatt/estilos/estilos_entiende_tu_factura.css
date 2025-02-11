@@ -20,7 +20,7 @@ body {
     ENCABEZADO
 ========================== */
 .encabezado2 {
-    background-color: rgb(145, 226, 248);
+    background-color: #264f59;
     min-height: 50vh;
     background-image: url('../images/Bombilla_rota.svg');
     background-repeat: no-repeat;
@@ -38,15 +38,15 @@ body {
 
 .encabezado-contenido2 h1 {
     font-size: 50px;
-    color: rgb(11, 72, 126);
+    color: #ffffff;
     text-transform: uppercase;
     margin-bottom: 0.5vw;
 }
 
 .encabezado-contenido2 h2,
 .encabezado-contenido2 h3 {
-    font-size: 18px;
-    color: #000;
+    font-size: 20px;
+    color: #ffffff;
     margin-bottom: 0.5vw;
 }
 

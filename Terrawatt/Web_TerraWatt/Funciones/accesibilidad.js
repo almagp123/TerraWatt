@@ -1,52 +1,10 @@
-// // Esperamos a que se carge todala página para ejecutar el scripr, y accedemos el elementoque el id "toggleAccesible", por otro lado creamos un boton en el cual podamos activaro desactivar este elemento, y creamos una función que lea el texto, es español, con un volumen1, a la velocidad especificada... 
-// document.addEventListener("DOMContentLoaded", function () {
-//     const toggleAccesible = document.getElementById("toggleAccesible");
-//     toggleAccesible.addEventListener("click", function () {
-//         document.body.classList.toggle("modo-accesible");
-//     });
-//     window.leerTexto = function (id) {
-//         // let texto = document.getElementById(id).innerText;
-//         let texto = document.getElementById(id).textContent;
-//         let speech = new SpeechSynthesisUtterance();
-//         speech.text = texto;
-//         speech.lang = "es-ES";
-//         speech.rate = 1;
-//         speech.volume = 1;
-//         window.speechSynthesis.speak(speech);
-//     };
-// });
+// DEBEMOS DE TENER EN CUENTA QUE PARA QUE LA FUNCION ACCESIBLE FUNCIONE DEBEMOSDE TENER INSTALADAS LAS VOCES EN NUESTRO ORDENADOR. PARA ELLO DEBEMOS DE: 
+// 1. ABRIR CONFIGURACION
+// 2. BUSCAR CONFIGURACION DE VOZ (DENTRO DE HORA E IDIOMA)
+// 3. AGREGAR LAS VOCES NECESARIAS (NORMALMENTE EL INGLES YA VIENE PREINSTALADO POR LO QUE DEBEREMOS DE INSTALAR EL ARABE)
+// 4. REINICIAR EL ORDENAR 
 
-// // document.addEventListener("DOMContentLoaded", function () {
-// //     const toggleAccesible = document.getElementById("toggleAccesible");
-// //     toggleAccesible.addEventListener("click", function () {
-// //         document.body.classList.toggle("modo-accesible");
-// //     });
 
-// //     window.leerTexto = function (id) {
-// //         // let texto = document.getElementById(id).textContent;
-// //         // let speech = new SpeechSynthesisUtterance();
-// //         let texto = document.getElementById(id).textContent;
-// //         let speech = new SpeechSynthesisUtterance();
-
-// //         speech.text = texto;
-
-// //         // Detecta el idioma del documento y ajusta la voz
-// //         let idioma = document.documentElement.lang;
-// //         if (idioma === "en") {
-// //             speech.lang = "en-US"; // Inglés americano
-// //         } 
-// //         if (idioma === "es") {
-// //             speech.lang = "es-ES"; // Inglés americano
-// //         } 
-// //         else {
-// //             speech.lang = "es-ES"; // Español de España
-// //         }
-
-// //         speech.rate = 1;
-// //         speech.volume = 1;
-// //         window.speechSynthesis.speak(speech);
-// //     };
-// // });
 document.addEventListener("DOMContentLoaded", function () {
     const toggleAccesible = document.getElementById("toggleAccesible");
     toggleAccesible.addEventListener("click", function () {
