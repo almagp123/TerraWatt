@@ -138,18 +138,104 @@ body {
     }
 }
 
+/* Estilos para cambiar de idioma (banderas...) */
 
+/* Contenedor del selector de idioma */
+.idioma-selector {
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+}
 
-
-
-/* Estilos del botón hamburguesa */
-.hamburguesa {
-    display: none; /* Oculto por defecto */
+/* Botón de la bandera */
+.idioma-boton {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 10px;
-    z-index: 1001;
+    padding: 5px;
+}
+
+.idioma-boton img {
+    width: 30px;
+    height: auto;
+}
+
+/* Menú desplegable oculto por defecto */
+.idioma-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    list-style: none;
+    padding: 5px 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: none; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Clase que hace que el menú sea visible cuando se activa */
+.idioma-menu.activo {
+    display: block;
+}
+
+.idioma-menu img {
+    width: 20px; 
+    height: auto;
+}
+
+ /* Ajuste en móviles */
+@media (max-width: 768px) {
+    .idioma-selector {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 9999; 
+    }
+    .idioma-menu img {
+        width: 20px; 
+        height: auto;
+    }
+
+    .idioma-menu {
+        position: absolute;
+        top: 40px;
+        left: auto;
+        right: auto;
+        width: max-content; 
+        min-width: 100px; 
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: none; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: visible; 
+        white-space: nowrap; 
+    }
+
+    .idioma-menu.activo {
+        display: block;
+    }
+
+    .idioma-boton img {
+        width: 25px; 
+    }
+}
+
+/* Estilos del botón hamburguesa */
+.hamburguesa {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    cursor: pointer;
+    background: none;
+    display: none; 
+    border: none;
+
+
 }
 
 .hamburguesa-linea {
@@ -212,16 +298,6 @@ body {
         width: 100%;
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -367,4 +443,3 @@ body.modo-accesible .accesible {
 .btn-voz:hover {
     transform: scale(1.1);
 }
-
