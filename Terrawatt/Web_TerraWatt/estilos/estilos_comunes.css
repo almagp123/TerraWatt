@@ -89,6 +89,12 @@ body {
     margin-right: 0.5rem;
 }
 
+:lang(ar) .boton-llamar i {
+    margin-left: 0.5rem;  /* Espaciado a la izquierda */
+    margin-right: 0; /* Elimina espaciado derecho */
+}
+
+
 .boton-llamar:hover {
     background-color: #008fcc;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
