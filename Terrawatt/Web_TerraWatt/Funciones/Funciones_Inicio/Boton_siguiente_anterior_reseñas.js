@@ -1,3 +1,7 @@
+// PREGUNTAR TEMA DE LAS RESEÑAS EN ARABE !!!!!!!!!! 
+
+
+
 // // Definimos el contenedor en el que estan las reseñas y los ID de los botones que hemos definido.
 // const slider = document.querySelector('.reseñas-slider');
 // const btnPrev = document.getElementById('goPrevious');
@@ -41,19 +45,18 @@ const slider = document.querySelector('.reseñas-slider');
 const btnPrev = document.getElementById('goPrevious');
 const btnNext = document.getElementById('goNext');
 
-// Definimos el índice inicial
 let currentIndex = 0;
 
 // Evento para el botón "Siguiente"
 btnNext.addEventListener('click', () => {
     const totalItems = slider.children.length;
     
-    if (esArabe) { // En árabe, el botón "siguiente" debe mover el slider hacia la IZQUIERDA
+    if (esArabe) { 
         if (currentIndex > 0) {
             currentIndex--; 
             updateSliderPosition(); 
         }
-    } else { // En LTR, el botón "siguiente" mueve el slider a la DERECHA
+    } else { 
         if (currentIndex < totalItems - 1) {
             currentIndex++; 
             updateSliderPosition(); 
@@ -65,12 +68,12 @@ btnNext.addEventListener('click', () => {
 btnPrev.addEventListener('click', () => {
     const totalItems = slider.children.length;
 
-    if (esArabe) { // En árabe, el botón "anterior" debe mover el slider hacia la DERECHA
+    if (esArabe) { 
         if (currentIndex < totalItems - 1) {
             currentIndex++; 
             updateSliderPosition(); 
         }
-    } else { // En LTR, el botón "anterior" mueve el slider a la IZQUIERDA
+    } else { 
         if (currentIndex > 0) {
             currentIndex--; 
             updateSliderPosition(); 
@@ -80,12 +83,12 @@ btnPrev.addEventListener('click', () => {
 
 // Función para actualizar la posición del slider
 function updateSliderPosition() {
-    const itemWidth = slider.children[0].clientWidth + 20; // Calculamos el ancho total de cada reseña
+    const itemWidth = slider.children[0].clientWidth + 20; 
 
     if (esArabe) {
-        slider.style.transform = `translateX(${currentIndex * itemWidth}px)`; // Mueve en sentido contrario
+        slider.style.transform = `translateX(${currentIndex * itemWidth}px)`; 
     } else {
-        slider.style.transform = `translateX(${-currentIndex * itemWidth}px)`; // Mueve en LTR normal
+        slider.style.transform = `translateX(${-currentIndex * itemWidth}px)`; 
     }
 }
 

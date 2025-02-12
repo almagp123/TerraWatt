@@ -17,13 +17,13 @@
     <button id="toggleAccesible" aria-label="Activar modo accesible">🦻 Modo Accesible</button>
 
     <!-- LLamamos el script que activa la funcion de acceibilidad que nospermite leer el texto que seleccionamos -->
-    <script src="Funciones/accesibilidad.js"></script>
+    <script src="./Funciones/Funciones_comunes/accesibilidad.js"></script>
 
     
     <!-- Llamamos a la funcion que nos permite obtener tanto la barra de navegacion como el pie de pagina, dependiendo del ID la función determina si debe de introducir o la barra de navegacion o el pie de página, en este caso como el id es "header-pleaceholder", introducir la barra de navegacion -->
     <section>
         <div id="header-placeholder"></div>
-        <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+        <script src="./Funciones/Funciones_comunes/Barra_navegacion_Pie_de_pagina.js"></script>
     </section>
 
     <section>
@@ -59,7 +59,7 @@
                 <span>4,8 | 956 opiniones Google</span>
             </div>
             <!-- Aplicamos la funcion que hemos creado que nos ajusta en este caso automaticamente la barra de navegacion y el encabezado para que por ejemplo en las versiones movil nose superpongan entre si. -->
-            <script src="Funciones/Ajustar_secciones.js"></script>
+            <script src="./Funciones/Funciones_comunes/Ajustar_secciones.js"></script>
         </header>
     </section>
 
@@ -124,8 +124,6 @@
                 <span class="material-icons">&#128266;</span>
             </button>
         </div>
-        <script src="Funciones/Ajustar_secciones.js"></script>
-
     </section>
 
     <!-- En esta seccion vamos a definir el apartado de los slides de las reseñas estas tienen -->
@@ -467,26 +465,21 @@
     </section>
     
     <!-- Este script nos permite  que los botones de anterior y siguiente de las reseñas, sean funcionales -->
-    <script src="Funciones/Boton_siguiente_anterior_reseñas.js"></script>
-
-
-
+    <script src="./Funciones/Funciones_Inicio/Boton_siguiente_anterior_reseñas.js"></script>
 
     <!-- Como hemos explicado al principio este script nos permite poner el pie de página automaticamente -->
     <section>    
         <div id="footer-placeholder"></div>
-        <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+        <script src="./Funciones/Funciones_comunes/Barra_navegacion_Pie_de_pagina.js"></script>
     </section>
 
     <!-- Definimos a siguiente seccion en el boton que te lleva al principio de la pagina, y añadimos tambien el script que nos permite que esto sea posible -->
     <section>
         <div id="boton-placeholder"></div>
-        <script src="Funciones/Boton_subir.js"></script>
+        <script src="./Funciones/Funciones_comunes/Boton_subir.js"></script>
     </section>
 
     <!-- Este script nos permite poder seleccionar el idioma, es decir cada vez que clikamos la bandera se nos abre un desplegable en el cual podemos elegir el idioma, este permanece hasta que hagamos click en alguna sitio de la pantalla fuera de este.  -->
-    <script src="Funciones/Idioma.js"> </script>
-
-
+    <script src="./Funciones/Funciones_comunes/Idioma.js"> </script>
 </body>
 </html>

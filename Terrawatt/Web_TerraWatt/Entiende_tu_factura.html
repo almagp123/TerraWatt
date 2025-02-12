@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Entiende tu factura</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="estilos/estilos_comunes.css">
     <link rel="stylesheet" href="estilos/estilos_entiende_tu_factura.css">
@@ -13,9 +13,12 @@
 <body>
     <!-- Botón de Modo Accesible -->
     <button id="toggleAccesible" aria-label="Activar modo accesible">🦻 Modo Accesible</button>
+
+    <script src="./Funciones/Funciones_comunes/accesibilidad.js"></script>
+
     <section>
             <div id="header-placeholder"></div>
-        <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+        <script src="./Funciones/Funciones_comunes/Barra_navegacion_Pie_de_pagina.js"></script>
     </section>
     </section>
         <header class="encabezado2">
@@ -36,10 +39,8 @@
                     <button class="btn-voz accesible" onclick="leerTexto('texto-titulo2')" aria-label="Leer título en voz alta">🔊</button>
                 </h2>
 
-
-
             </div>
-
+            <script src="./Funciones/Funciones_comunes/Ajustar_secciones.js"></script>
         </header>
     </section>
     <section>
@@ -235,18 +236,15 @@
             </div>
         </div>
         
-        </div>
-            <script src="Funciones/Modal_cerrar.js"></script>
-        </div>
+
         <div>
-            <script src="Funciones/Estilo_botones_texto.js"></script>
+            <script src="./Funciones/Funciones_Entiende/Ventanas_emergentes_accesibilidad_permanente.js"></script>
         </div>       
     </section>
     <div id="footer-placeholder"></div>
-    <script src="Funciones/Barra_navegacion_Pie_de_pagina.js"></script>
+    <script src="./Funciones/Funciones_comunes/Barra_navegacion_Pie_de_pagina.js"></script>
     <div id="boton-placeholder"></div>
-    <script src="Funciones/Boton_subir.js"></script>
-    <script src="Funciones/accesibilidad.js"></script>
+    <script src="./Funciones/Funciones_comunes/Boton_subir.js"></script>
 
 </section>
     

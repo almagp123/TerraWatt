@@ -17,13 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
         speech.text = texto;
 
         // Detecta el idioma del documento y ajusta la voz
+        // Si quisieramos añadir algun idioma más deberíamos simplemente de añadir otro else if y añadir el nuevo idioma con su acronimo lang. 
         let idioma = document.documentElement.lang;
         if (idioma === "en") {
-            speech.lang = "en-US"; // Inglés americano
+            speech.lang = "en-US"; 
         } else if (idioma === "ar") {
-            speech.lang = "ar-SA"; // Árabe (Arabia Saudita)
+            speech.lang = "ar-SA"; 
         } else {
-            speech.lang = "es-ES"; // Español de España
+            speech.lang = "es-ES"; 
         }
 
         speech.rate = 1;
