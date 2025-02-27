@@ -13,4 +13,3 @@ CMD ["sh", "-c", "\
                     python Generacion_csv_modelos.py && \
                     python Conexion_elasticsearch.py &&\
                     tail -f /dev/null"]
-

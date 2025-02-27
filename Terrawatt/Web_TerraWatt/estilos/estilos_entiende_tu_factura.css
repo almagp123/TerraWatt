@@ -14,22 +14,19 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #f9f9f9;
     color: #333;
+    overflow-x: hidden;
 }
 
 /* ==========================
     ENCABEZADO
 ========================== */
 .encabezado2 {
-    background-color: #264f59;
     min-height: 50vh;
-    background-image: url('../images/Bombilla_rota.svg');
-    background-repeat: no-repeat;
-    background-position: right 13% bottom 70%;
-    background-size: 25%;
+    background:#264f59 url('../images/Bombilla_rota.svg') no-repeat right 13% bottom 70% / 25%;
     padding-bottom: 9rem;
-
-    
+    padding-right: 3vh;
 }
+
 
 .encabezado-contenido2 {
     margin-left: 10%;
@@ -69,21 +66,15 @@ body {
     position: relative;
     width: 500px;
     height: 700px;
-    background-color: #fff;
+    background: #fff url('../images/factura_alba-1_tachado-1.svg') no-repeat center / calc(100% - 40px) calc(100% - 40px);
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
     margin: 10px;
-    background-size: calc(100% - 40px) calc(100% - 40px);
-
 }
 
-/* Fondos de cada factura */
-.factura-pagina-1 .factura { background-image: url('../images/factura_alba-1_tachado-1.svg'); }
+/* Fondos de cada factura (override the default background image) */
 .factura-pagina-2 .factura { background-image: url('../images/factura_alba-2-1.svg'); }
 .factura-pagina-3 .factura { background-image: url('../images/factura_alba-3-1.svg'); }
 .factura-pagina-4 .factura { background-image: url('../images/factura_alba-5-1.svg'); }
@@ -92,6 +83,7 @@ body {
     ESTILO DE SECCIONES (Facturas)
 ========================== */
 .factura-section {
+    position: absolute;
     background-color: rgba(76, 175, 80, 0.1);
     border: 1px solid #4caf50;
     border-radius: 5px;
@@ -103,23 +95,14 @@ body {
     color: #333;
     padding: 10px;
     cursor: pointer;
-    /* animation: parpadeo 2s ease-in-out infinite; */
 }
 
-/* Resaltar foco en navegación por teclado */
 .factura-section:focus {
     outline: 3px solid rgb(7, 69, 21);
     background-color: rgba(76, 175, 80, 0.3);
 }
 
-/* ==========================
-    POSICIONES ESPECÍFICAS DE LAS SECCIONES
-========================== */
-.factura-section {
-    position: absolute;
-    box-sizing: border-box;
-}
-
+/* Posiciones específicas de las secciones */
 .factura-section.datos_personales { top: 4%; left: 50%; width: 45%; height: 10%; }
 .factura-section.resumen { top: 23.5%; left: 9%; width: 87%; height: 13%; }
 .factura-section.consumo_total { top: 40%; left: 9%; width: 43%; height: 20%; }
@@ -132,12 +115,52 @@ body {
 .factura-section.graficos { top: 6%; left: 9%; width: 85%; height: 32%; }
 
 /* ==========================
-    ANIMACIÓN PARPADEO
+    SECCIÓN FACTURAS (Mobile Adjustments)
 ========================== */
-@keyframes parpadeo {
-    0%, 100% { background-color: rgba(76, 175, 80, 0.1); }
-    50% { background-color: rgba(76, 175, 80, 0.2); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+@media screen and (max-width: 768px) {
+
+    .encabezado2 {
+        min-height: 50vh;
+        background:#264f59 ;
+        padding-bottom: 9rem;
+    }
+
+    .seccion-facturas {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 6vh;
+        width: 100%;
+        zoom: 80%;
+    }
+
+    .factura-pagina-1 .factura,
+    .factura-pagina-2 .factura,
+    .factura-pagina-3 .factura,
+    .factura-pagina-4 .factura {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 8.5 / 11;
+        min-height: 550px;
+        margin: 0;
+        padding: 5px;
+        background-size: contain;
+        background-position: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .factura-section.datos_personales { top: 1%; left: 48%; width: 48%; height: 10%; }
+    .factura-section.resumen { top: 22%; left: 8%; width: 88%; height: 13%; }
+    .factura-section.consumo_total { top: 36%; left: 8%; width: 44%; height: 18%; }
+    .factura-section.evolucion_consumo { top: 36%; left: 54%; width: 42%; height: 28%; }
+    .factura-section.datos { top: 1%; left: 8%; width: 86%; height: 14.5%; }
+    .factura-section.detalles { top: 16%; left: 8%; width: 44%; height: 22%; }
+    .factura-section.informacion_consumo { top: 28%; left: 52%; width: 44%; height: 11%; }
+    .factura-section.detalles_de_la_factura { top: 2%; left: 8%; width: 86%; height: 18%; }
+    .factura-section.resumen_total { top: 22%; left: 8%; width: 86%; height: 9%; }
+    .factura-section.graficos { top: 3%; left: 8%; width: 86%; height: 34%; }
 }
+
 
 /* ==========================
     MODAL (Ventana emergente)
@@ -157,15 +180,25 @@ body {
 
 .modal-content {
     background: #fff;
-    padding: 20px;
+    padding: 60px 20px 20px 20px; 
     border-radius: 8px;
     width: 80%;
     max-width: 1000px;
+    max-height: 80vh;
+    overflow-y: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     position: relative;
+    box-sizing: border-box;
 }
 
-/* Botón de cerrar */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        max-height: 70vh;
+        padding: 50px 15px 15px 15px;
+    }
+}
+
 .close {
     position: absolute;
     top: 10px;
@@ -177,9 +210,34 @@ body {
     color: #333;
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
     color: red;
     outline: 2px solid red;
+}
+
+.btn-accesibilidad {
+    position: absolute;
+    top: 10px; 
+    right: 60px; 
+    background-color: #005f99;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+    width: 40px; 
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-accesibilidad:hover {
+    background-color: #003f66;
 }
 
 /* ==========================
@@ -208,7 +266,6 @@ body {
     padding-left: 20px;
 }
 
-/* Listas dentro del modal */
 #modal-subinfo ul {
     list-style-type: disc;
     padding-left: 20px;
@@ -222,53 +279,14 @@ body {
     margin-bottom: 5px;
 }
 
-/* Enlaces dentro del modal */
-#modal-info a, #modal-subinfo a {
+#modal-info a,
+#modal-subinfo a {
     color: rgb(11, 72, 126);
     text-decoration: none;
     font-weight: 500;
 }
 
-#modal-info a:hover, #modal-subinfo a:hover {
+#modal-info a:hover,
+#modal-subinfo a:hover {
     text-decoration: underline;
 }
-
-/* ==========================
-    EFECTO DE APARICIÓN DEL MODAL
-========================== */
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-
-
-/* Botón de accesibilidad dentro del modal */
-.btn-accesibilidad {
-    position: absolute;
-    bottom: 15px;  /* Mantener en la parte inferior */
-    right: 15px;   /* Cambiar de left a right para moverlo a la derecha */
-    background-color: #005f99; /* Color accesibilidad */
-    color: white;
-    border: none;
-    padding: 15px;  /* Aumentar el tamaño del botón */
-    font-size: 20px; /* Hacer el icono más grande */
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s;
-    width: 55px;  /* Ajustar el tamaño del botón */
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-accesibilidad:hover {
-    background-color: #003f66;
-}
-
-
-
-
-
