@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //  Se cierra el modal con un click
     closeBtn.addEventListener("click", closeModal);
 
-    // Se cierra el modal con el teclado ya sea con el enter o con un espaico 
+    // Se cierra el modal con el teclado ya sea con el enter o con un espacio 
     closeBtn.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
             closeModal();

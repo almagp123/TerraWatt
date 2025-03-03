@@ -7,7 +7,7 @@ function cargarComponente(url, contenedorId, callback) {
         })
         .then(data => {
             document.getElementById(contenedorId).innerHTML = data;
-            console.log(`✅ ${url} cargado exitosamente.`);
+            console.log(` ${url} cargado exitosamente.`);
             if (callback) callback(); r
         })
         .catch(error => console.error(`Error al cargar ${url}:`, error));
@@ -37,7 +37,7 @@ if (idioma === "es") {
 
 //Función para activar el botón hamburguesa, imprimos por consola algunos avisos para poder comporbar que su funcionamientoes el adecuado
 function inicializarHamburguesa() {
-    console.log("✅ Lógica de la hamburguesa inicializada.");
+    console.log("Lógica de la hamburguesa inicializada.");
 
     const hamburguesa = document.querySelector('.hamburguesa');
     const barraNav = document.querySelector('.barra-navegacion');

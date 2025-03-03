@@ -37,17 +37,20 @@
 //     slider.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
 // }
 
-// Detectamos si la página está en árabe
+
+
+
+
+
+
 const esArabe = document.documentElement.lang === "ar";
 
-// Definimos el contenedor del slider y los botones
 const slider = document.querySelector('.reseñas-slider');
 const btnPrev = document.getElementById('goPrevious');
 const btnNext = document.getElementById('goNext');
 
 let currentIndex = 0;
 
-// Evento para el botón "Siguiente"
 btnNext.addEventListener('click', () => {
     const totalItems = slider.children.length;
     
@@ -64,7 +67,6 @@ btnNext.addEventListener('click', () => {
     }
 });
 
-// Evento para el botón "Anterior"
 btnPrev.addEventListener('click', () => {
     const totalItems = slider.children.length;
 
@@ -81,7 +83,6 @@ btnPrev.addEventListener('click', () => {
     }
 });
 
-// Función para actualizar la posición del slider
 function updateSliderPosition() {
     const itemWidth = slider.children[0].clientWidth + 20; 
 

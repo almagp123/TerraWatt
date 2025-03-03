@@ -1,3 +1,7 @@
+// NO TENER ENCUENTA SEGURAMENTE HAYA QUE CAMBIARLO TODO CUANDO SE CONECTE AL DOCKER YA QUE YA NO SE PODRÁ USAR UNA FAST API
+// NO BORRAR PARA TENER DE REFERENCIA EL CÓDIGO!!!!
+
+
 // Función para manejar botones activos
 function activarBoton(botonSeleccionado, botones) {
   botones.forEach(boton => boton.classList.remove("activo"));
